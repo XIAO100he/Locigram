@@ -210,6 +210,9 @@ i{
 	margin-right:5px;
 }
 /*****************トップページ********************/
+.index-wrapper{
+	min-height: 580px;
+}
 .top-image_wrapper{
 	height:400px;
 	width:55%;
@@ -253,6 +256,7 @@ i{
 
 /*******************退会ページ***********************/
 .withdraw-wrapper{
+	min-height:560px;
 	width:500px;
 	padding-top:80px;
 	margin: 0 auto;
