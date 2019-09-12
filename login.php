@@ -30,12 +30,14 @@ if(!empty($_POST)){
 	if(empty($err_msg)){
 		debug('バリデーションOKです');
 
-		try{
-			$dbh =dbConnect();
-			$sql = 'SELECT pass,id FROM users WHERE email = :email, AND delete_flg=0';
+		try {
+			$dbh = dbConnect();
+			$sql = 'SELECT pass,id  FROM users WHERE email = :email AND delete_flg = 0';
 			$data = array(':email' => $email);
-			$stmt = queryPost($dbh,$sql,$data);
-			$result = $stmt-> fetch(PDO::FETCH_ASSOC);
+			$stmt = queryPost($dbh, $sql, $data);
+			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+			debug('クエリ結果の中身：'.print_r($result,true));
 
 			debug('クエリ結果の中身：'.print_r($result,true));
 
@@ -80,6 +82,11 @@ require('header.php');
 
 <div class='login-wrapper'>
 	<h2>ログイン</h2>
+	<div class="area-msg">
+		<?php 
+		if(!empty($err_msg['common'])) echo $err_msg['common'];
+		?>
+	</div>
 	<form action="" method="post">
 		<div class=login-box>
 <!--		メールアドレス-->
