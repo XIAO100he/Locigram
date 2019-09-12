@@ -39,39 +39,37 @@ if(!empty($_POST)){
 
 			debug('クエリ結果の中身：'.print_r($result,true));
 
-			debug('クエリ結果の中身：'.print_r($result,true));
+			if(!empty($result) && password_verify($pass, array_shift($result))){
+				debug('パスワードがマッチしました。');
+				$sesLimit = 60*60;
+				$_SESSION['login_date'] = time(); //time関数は1970年1月1日 00:00:00 を0として、1秒経過するごとに1ずつ増加させた値が入る
 
-			if(!empty($result) && password_verify($pass,array_shift($result))){
-				debug('パスワードがマッチしました');
-
-				$sessLimit=60*60;
-				$_SESSION['login-date'] = time();
-
-				if(pass_save){
-					debug('ログイン保持にチェックがあります');
-					$_SESSION['login_limit'] = $sessLimit * 24 * 30;
-				} else {
-					debug('ログイン保持にチェックはありません');
-					$_SESSION['login_limit'] = $sessLimit;
+				if($pass_save){
+					debug('ログイン保持にチェックがあります。');
+					$_SESSION['login_limit'] = $sesLimit * 24 * 30;
+				}else{
+					debug('ログイン保持にチェックはありません。');
+					$_SESSION['login_limit'] = $sesLimit;
 				}
 				$_SESSION['user_id'] = $result['id'];
 
-				debug('セッション変数の中身：'.print_r($_SESSION, true));
-				debug('マイページへ遷移します');
-				header('Location:index.php');
-			} else {
-				debug('パスワードがアンマッチです');
+				debug('セッション変数の中身：'.print_r($_SESSION,true));
+				debug('マイページへ遷移します。');
+				header("Location:mypage.php"); //マイページへ
+			}else{
+				debug('パスワードがアンマッチです。');
 				$err_msg['common'] = MSG07;
 			}
-		} catch (Exception $e){
-			error_log('エラー発生:'.$e->getMessage());
+
+		} catch (Exception $e) {
+			error_log('エラー発生:' . $e->getMessage());
 			$err_msg['common'] = MSG06;
 		}
 	}
 }
-
 debug('画面表示処理終了 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
 ?>
+
 
 
 <?php
