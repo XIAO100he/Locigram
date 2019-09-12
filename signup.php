@@ -41,7 +41,7 @@ if(!empty($_POST)){
 			validMatch($pass, $pass_re, 'pass_re');
 
 			if(empty($err_msg)){
-
+				debug('バリデーションOKです');
 				//例外処理
 				try {
 					// DBへ接続
@@ -67,7 +67,7 @@ if(!empty($_POST)){
 
 						debug('セッション変数の中身：'.print_r($_SESSION,true));
 
-						header("Location:index.php"); //マイページへ
+						header("Location:mypage.php");
 					}else{
 						error_log('クエリに失敗しました。');
 						$err_msg['common'] = MSG06;
@@ -87,6 +87,7 @@ if(!empty($_POST)){
 <!--*************ページView内容*******************-->
 <html>
 	<?php
+	$siteTitle = '会員登録';
 	require('head.php');
 	?>
 	<body>
@@ -103,9 +104,9 @@ if(!empty($_POST)){
 				if(!empty($err_msg['common'])) echo $err_msg['common'];
 				?>
 			</div>
-			<form action="" method='post'class="form">
+			<form action="" method='post'class="signup-form">
 				<!--		名前-->
-				<label class="<?php if(!empty($err_msg['email'])) echo 'err'; ?>">
+				<label class="<?php if(!empty($err_msg['name'])) echo 'err'; ?>">
 					<div class="theme-wrapper">
 						<p>ニックネーム</p>
 						<p class="must"><span>必須</span></p>
@@ -158,7 +159,7 @@ if(!empty($_POST)){
 					?>
 				</div>
 				<!--			会員登録ボタン-->
-				<input type="submit" value="会員登録">
+				<input type="submit" value="会員登録" class="signup-btn">
 			</form>
 		</div>
 	<!--フッター-->
