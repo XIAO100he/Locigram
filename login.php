@@ -8,14 +8,14 @@ debug('「「「「「「「「「「「「「「「「「「「「「「「「�
 debugLogStart();
 
 require('auth.php');
+debug('auth認証完了');
 
 if(!empty($_POST)){
 	debug('POST送信があります');
 
-	$name = $_POST['name'];
 	$email = $_POST['email'];
 	$pass = $_POST['pass'];
-	$pass_save = (!empty($_POST['pass_save']))?  true: false;
+	$pass_save = (!empty($_POST['pass_save'])) ? true : false; 
 
 	//emailの形式チェック
 	validEmail($email, 'email');
@@ -23,11 +23,7 @@ if(!empty($_POST)){
 	//パスワードの最小文字数チェック
 	validMinLen($pass, 'pass');
 
-	//パスワード（再入力）の最小文字数チェック
-	validMinLen($pass_re, 'pass_re');
-
 	//未入力チェック
-	validRequired($name, 'name');
 	validRequired($email, 'email');
 	validRequired($pass, 'pass');
 
@@ -84,7 +80,7 @@ require('header.php');
 
 <div class='login-wrapper'>
 	<h2>ログイン</h2>
-	<form action="" methd="post">
+	<form action="" method="post">
 		<div class=login-box>
 <!--		メールアドレス-->
 			<label class="<?php if(!empty($err_msg['email'])) echo 'err'; ?>">
@@ -103,17 +99,21 @@ require('header.php');
 				<div class="theme-wrapper">
 					<p>パスワード</p>
 				</div>
-				<input type="password" name="password" value="<?php if(!empty($_POST['pass'])) echo $_POST['pass']; ?>">
+				<input type="password" name="pass" value="<?php if(!empty($_POST['pass'])) echo $_POST['pass']; ?>">
 			</label>
 			<div class="area-msg">
 				<?php
 				if(!empty($err_msg['pass'])) echo $err_msg['pass'];
 				?>
 			</div>
+<!--			次回ログイン-->
 			<label class="next-login">
 				<input type="checkbox" name="pass_save">次回ログインを省略する
 			</label>
-			<input type="submit" class='login-do-btn' value='ログインする' name="submit">
+			<div>
+				<input type="submit" class='login-do-btn' value="ログイン">
+			</div>
+<!--			-->
 		</div>
 	</form>
 </div>
