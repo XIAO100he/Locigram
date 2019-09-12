@@ -2,6 +2,10 @@
 $siteTitle='マイページ';
 require('head.php');
 ?>
+<!--ヘッダー-->
+<?php
+require('header.php');
+?>
 <body>
 
 	<?php
