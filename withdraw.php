@@ -65,7 +65,7 @@ require('header.php');
 		</div>
 	</form>
 	<p class='back-to'>
-		<a href='index.php'>&lt; マイページへ戻る</a>
+		<a href='mypage.php'>&lt; マイページへ戻る</a>
 	</p>
 </div>
 
