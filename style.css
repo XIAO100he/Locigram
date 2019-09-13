@@ -63,13 +63,11 @@ header{
 .header-signup-btn{
 	color:#fff;
 }
-.login-btn{
+.login-btn, .logout-btn, .myp-btn{
 	color:#fff;
 }
 
 /*******************サインアップページ***********************/
-
-/*サインアップページ*/
 .registration{
 	width:500px;
 	padding-top:80px;
@@ -186,7 +184,7 @@ footer{
 
 .menu-main{
 	height:100%;
-	width:85%;
+	width:75%;
 	margin:0 auto;
 	overflow: hidden;
 }
@@ -200,8 +198,9 @@ footer{
 	cursor: pointer;
 	color:#c0c0c0;
 }
-li+ li {
+.left-menu {
 	border-left: 1px dotted #333;
+	color:black;
 }
 .mrg-20{
 	margin-left:20px;
@@ -358,4 +357,56 @@ label.err input{
 .next-login{
 	padding-left:15px;
 }
+/*****************マイページ********************/
+.main-wrapper{
+	width:80%;
+	min-height:640px;
+	margin:0 auto;
+	padding-top:100px;
+	overflow: hidden;
+}
+.my-main_wrapper{
+	width:70%;
+	min-height:640px;
+	float:left;
+}
+/*****************サイドバック********************/
+.my-side_wrapper{
+	width:30%;
+	min-height:640px;
+	margin-top:50px;
+	float:left;
+}
+.side-box{
+	width:70%;
+	margin:0 auto;
+	border:1px solid black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
