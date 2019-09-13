@@ -387,7 +387,7 @@ label.err input{
 	margin-bottom:40px;
 }
 .side-menu{
-	width:130px;
+	width:150px;
 	margin-top:40px;
 }
 .side-menu:hover{
@@ -399,10 +399,13 @@ label.err input{
 }
 /*****************プロフィール編集********************/
 .prof-wrapper{
-	
+	width:70%;
+	height:1700px;
+	float:left;
 }
-
-
+.change-prf-btn{
+	margin-right:200px;
+}
 
 
 

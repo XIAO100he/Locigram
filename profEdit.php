@@ -59,7 +59,7 @@ require('head.php');
 	<!--					Email-->
 						<label class="<?php if(!empty($err_msg['email'])) echo 'err'; ?>">
 							<div class="theme-wrapper">
-								<p>名</p>
+								<p>Email</p>
 							</div>
 							<input type="text" name="email" value="<?php if(!empty($_POST['email'])) echo $_POST['email']; ?>">
 						</label>
@@ -140,9 +140,11 @@ require('head.php');
 							if(!empty($err_msg['section'])) echo $err_msg['section'];
 							?>
 						</div>
-
+						<div class="change-prf">
+							<input type="submit" class='change-prf-btn' value="変更する">
+						</div>
 					</div>
-				</form>
+			</form>
 			</div>
 		<!--	サイドボックス-->
 		<?php
