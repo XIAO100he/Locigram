@@ -25,6 +25,7 @@ require('head.php');
 require('header.php');
 ?>
 	<div class="main-wrapper">
+		<h2>マイページ</h2>
 	<!--メインボックス-->
 		<div class="my-main_wrapper">
 
