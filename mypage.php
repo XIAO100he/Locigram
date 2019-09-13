@@ -19,12 +19,21 @@ require('auth.php');
 $siteTitle='マイページ';
 require('head.php');
 ?>
+<body>
 <!--ヘッダー-->
 <?php
 require('header.php');
 ?>
-<body>
+	<div class="main-wrapper">
+	<!--メインボックス-->
+		<div class="my-main_wrapper">
 
+		</div>
+	<!--	サイドボックス-->
+	<?php
+		require('side_bar.php');
+	?>
+	</div>
 	<?php
 	require('footer.php');
 	?>
