@@ -18,7 +18,6 @@ debug('取得したユーザー情報'.print_r($dbFormData,true));
 	if(!empty($_POST)){
 		debug('POST送信があります');
 		debug('POST情報:'.print_r($_POST, true));
-		debug('FILE情報：'.print_r($_FILE,true));
 
 		$name = $_POST['name'];
 		$last_name = $_POST['last_name'];
@@ -190,7 +189,7 @@ require('head.php');
 	<!--					TEL-->
 						<label class="<?php if(!empty($err_msg['tel'])) echo 'err'; ?>">
 							<div class="theme-wrapper">
-								<p class="sub_theme">TEL<span style="font-size:12px;margin-left:5px;">※ハイフン無しでご入力ください</span></p>
+								<p class="sub_theme">TEL<span style="font-size:12px;margin-left:10px;">※ハイフン無しでご入力ください</span></p>
 							</div>
 							<input type="text" name="tel" value="<?php if(!empty($_POST['tel'])) echo $_POST['tel']; ?>">
 						</label>
@@ -202,7 +201,7 @@ require('head.php');
 	<!--					郵便番号-->
 						<label class="<?php if(!empty($err_msg['zip'])) echo 'err'; ?>">
 							<div class="theme-wrapper">
-								<p class="sub_theme">郵便番号<span style="font-size:12px;margin-left:5px;">※ハイフン無しでご入力ください</span></p>
+								<p class="sub_theme">郵便番号<span style="font-size:12px;margin-left:10px;">※ハイフン無しでご入力ください</span></p>
 							</div>
 							<input type="text" name="zip" value="<?php if(!empty($_POST['zip'])) echo $_POST['zip']; ?>">
 						</label>
