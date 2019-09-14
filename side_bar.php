@@ -1,11 +1,11 @@
 <div class="my-side_wrapper">
 	<div class="side-box">
 		<ul class='side-ul'>
-			<li class="side-menu">▷カゴの中身</li>
-			<li class="side-menu">▷購入履歴</li>
-			<li class="side-menu">▷お気に入り</li>
+			<li class="side-menu"><a href="insideBox.php" class="side-btn">▷カゴの中身</a></li>
+			<li class="side-menu"><a href="purchaseHis.php" class="side-btn">▷購入履歴</a></li>
+			<li class="side-menu"><a href="likeItem.php" class="side-btn">▷お気に入り</a></li>
 			<li class="side-menu"><a href="profEdit.php" class="side-btn">▷プロフィール編集</a></li>
-			<li class="side-menu">▷パスワード変更</li>
+			<li class="side-menu"><a href="passEdit.php" class="side-btn">▷パスワード変更</a></li>
 			<li class="side-menu"><a href="withdraw.php" class="side-btn">▷退会手続</a></li>
 		</ul>
 	</div>
