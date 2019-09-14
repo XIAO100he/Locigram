@@ -57,6 +57,13 @@ define('MSG04','※半角英数字6文字以上でご入力ください');
 define('MSG05','※パスワードが一致しません');
 define('MSG06','エラーが発生しました。しばらく経ってからやり直してください');
 define('MSG07','メールアドレスもしくはパスワードが違います');
+define('MSG08','電話番号の形式が違います');
+define('MSG09','郵便番号の形式が違います');
+define('SUC01', 'パスワードを変更しました');
+define('SUC02', 'プロフィールを変更しました');
+
+
+
 
 
 //================================
@@ -82,7 +89,6 @@ function validEmail($str, $key){
 		$err_msg[$key] = MSG02;
 	}
 }
-//バリデーションチェック（Email重複）
 //バリデーション関数（Email重複チェック）
 function validEmailDup($email){
 	global $err_msg;
@@ -117,6 +123,13 @@ function validMatch($str1, $str2, $key){
 		$err_msg[$key] = MSG05;
 	}
 }
+//バリデーションチェック（最大文字数）
+function validMaxLen($str, $key, $max = 255){
+	if(mb_strlen($str) > $max){
+		global $err_msg;
+		$err_msg[$key] = MSG06;
+	}
+}
 //バリデーションチェック（最小文字数）
 function validMinLen($str, $key, $min = 6){
 	if(mb_strlen($str) < $min){
@@ -124,6 +137,29 @@ function validMinLen($str, $key, $min = 6){
 		$err_msg[$key] = MSG04;
 	}
 }
+
+//電話番号形式チェック
+function validTel($str, $key){
+	if(!preg_match("/0\d{1,4}\d{1,4}\d{4}/", $str)){
+		global $err_msg;
+		$err_msg[$key] = MSG8s;
+	}
+}
+//郵便番号形式チェック
+function validZip($str, $key){
+	if(!preg_match("/^\d{7}$/", $str)){
+		global $err_msg;
+		$err_msg[$key] = MSG9;
+	}
+}
+//エラーメッセージ表示
+function getErrMsg($key){
+	global $err_msg;
+	if(!empty($err_msg[$key])){
+		return $err_msg[$key];
+	}
+}
+
 
 //================================
 // ログイン認証
@@ -188,5 +224,66 @@ function queryPost($dbh, $sql, $data){
 	}
 	debug('クエリ成功。');
 	return $stmt;
+}
+//ユーザー情報を取る
+function getUser($u_id){
+	debug('ユーザー情報を取得します');
+	
+	try{
+		$dbh = dbConnect();
+		$sql = 'SELECT * FROM users WHERE id = :u_id AND delete_flg = 0';
+		$data = array(':u_id'=> $u_id);
+		$stmt = queryPost($dbh,$sql,$data);
+		
+		if($stmt){
+			return $stmt->fetch(PDO::FETCH_ASSOC);
+		} else {
+			return false;
+		}
+	} catch (Exception $e){
+		error_log('エラー発生'.$e-> getMessage());
+	}
+}
+
+
+//================================
+// その他
+//================================
+// サニタイズ
+function sanitize($str){
+	return htmlspecialchars($str,ENT_QUOTES);
+}
+// フォーム入力保持
+function getFormData($str, $flg = false){
+	if($flg){
+		$method = $_GET;
+	}else{
+		$method = $_POST;
+	}
+	global $dbFormData;
+	// ユーザーデータがある場合
+	if(!empty($dbFormData)){
+		//フォームのエラーがある場合
+		if(!empty($err_msg[$str])){
+			//POSTにデータがある場合
+			if(isset($method[$str])){
+				return sanitize($method[$str]);
+			}else{
+				//ない場合（基本ありえない）はDBの情報を表示
+				return sanitize($dbFormData[$str]);
+			}
+		}else{
+			//POSTにデータがあり、DBの情報と違う場合
+			if(isset($method[$str]) && $method[$str] !== $dbFormData[$str]){
+				return sanitize($method[$str]);
+			}else{
+				return sanitize($dbFormData[$str]);
+			}
+		}
+	}else{
+		if(isset($method[$str])){
+			return sanitize($method[$str]);
+		}
+	}
 }
 ?>
