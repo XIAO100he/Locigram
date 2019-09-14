@@ -24,6 +24,9 @@ require('head.php');
 <?php
 require('header.php');
 ?>
+<!--成功時のメッセージ-->
+
+<!--メイン箇所-->
 	<div class="main-wrapper">
 		<h2>マイページ</h2>
 	<!--メインボックス-->
