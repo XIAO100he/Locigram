@@ -111,8 +111,7 @@ if(!empty($_POST)){
 						<p>ニックネーム</p>
 						<p class="must"><span>必須</span></p>
 					</div>
-
-					<input type="text" name="name"placeholder="（例）ふるさと太郎">
+					<input type="text" name="name" placeholder="（例）ふるさと太郎" value="<?php if(!empty($_POST['name'])) echo $_POST['name']; ?>">
 				</label>
 				<div class="area-msg">
 					<?php
