@@ -50,15 +50,17 @@ function debugLogStart(){
 //================================
 // エラーメッセージ定数
 //================================
-define('MSG01','※必ずご入力ください');
-define('MSG02','※正しい形式でご入力ください');
-define('MSG03','※そのメールアドレスは既に登録されています');
-define('MSG04','※半角英数字6文字以上でご入力ください');
-define('MSG05','※パスワードが一致しません');
-define('MSG06','エラーが発生しました。しばらく経ってからやり直してください');
-define('MSG07','メールアドレスもしくはパスワードが違います');
-define('MSG08','電話番号の形式が違います');
-define('MSG09','郵便番号の形式が違います');
+define('MSG01', '※必ずご入力ください');
+define('MSG02', '※正しい形式でご入力ください');
+define('MSG03', '※そのメールアドレスは既に登録されています');
+define('MSG04', '※半角英数字6文字以上でご入力ください');
+define('MSG05', '※パスワードが一致しません');
+define('MSG06', 'エラーが発生しました。しばらく経ってからやり直してください');
+define('MSG07', 'メールアドレスもしくはパスワードが違います');
+define('MSG08', '電話番号の形式が違います');
+define('MSG09', '郵便番号の形式が違います');
+define('MSG10', '古いパスワードが違います');
+define('MSG11', '古いパスワードと同じです');
 define('SUC01', 'パスワードを変更しました');
 define('SUC02', 'プロフィールを変更しました');
 
@@ -137,19 +139,25 @@ function validMinLen($str, $key, $min = 6){
 		$err_msg[$key] = MSG04;
 	}
 }
-
+//バリデーション関数（半角チェック）
+function validHalf($str, $key){
+	if(!preg_match("/^[a-zA-Z0-9]+$/", $str)){
+		global $err_msg;
+		$err_msg[$key] = MSG04;
+	}
+}
 //電話番号形式チェック
 function validTel($str, $key){
 	if(!preg_match("/0\d{1,4}\d{1,4}\d{4}/", $str)){
 		global $err_msg;
-		$err_msg[$key] = MSG8s;
+		$err_msg[$key] = MSG08;
 	}
 }
 //郵便番号形式チェック
 function validZip($str, $key){
 	if(!preg_match("/^\d{7}$/", $str)){
 		global $err_msg;
-		$err_msg[$key] = MSG9;
+		$err_msg[$key] = MSG09;
 	}
 }
 //エラーメッセージ表示
@@ -159,7 +167,15 @@ function getErrMsg($key){
 		return $err_msg[$key];
 	}
 }
-
+//パスワードチェック
+function validPass($str, $key){
+	//半角英数字チェック
+	validHalf($str, $key);
+	//最大文字数チェック
+	validMaxLen($str, $key);
+	//最小文字数チェック
+	validMinLen($str, $key);
+}
 
 //================================
 // ログイン認証
