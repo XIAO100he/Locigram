@@ -61,7 +61,7 @@ require('header.php');
 	<h2>退会手続</h2>
 	<form action="" methd="post">
 		<div class=withdraw-box>
-			<input type="submit" class=withdraw-btn value='退会する' name="submit">
+			<input type="submit" class='withdraw-btn' value='退会する' name="submit">
 		</div>
 	</form>
 	<p class='back-to'>
