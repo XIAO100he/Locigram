@@ -48,6 +48,9 @@ require('head.php');
 		</div>
 	</div>
 	<?php
+	require('postBtn.php');
+	?>
+	<?php
 	require('footer.php');
 	?>
 </body>
