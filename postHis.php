@@ -3,7 +3,7 @@
 require('function.php');
 
 debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
-debug('「　カゴの中身　');
+debug('「　過去の投稿　');
 debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
 debugLogStart();
 
@@ -16,7 +16,7 @@ require('auth.php');
 
 <!------------------------ビュー---------------------------------->
 <?php
-$siteTitle='カゴの中身';
+$siteTitle='過去の投稿';
 require('head.php');
 ?>
 <body>
@@ -25,7 +25,7 @@ require('head.php');
 	require('header.php');
 	?>
 	<div class="main-wrapper">
-		<h2>カゴの中身</h2>
+		<h2>過去の投稿</h2>
 		<!--メインボックス-->
 		<div class="my-main_wrapper">
 
