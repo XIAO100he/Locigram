@@ -99,13 +99,13 @@ require('head.php');
 	<div class="main-wrapper">
 		<h2>プロフィール編集</h2>
 		<div class="prof-wrapper">
-				<form action="" method="post" enctype="multipart/form-data">
-					<div class="area-msg">
-						<?php 
-						if(!empty($err_msg['common'])) echo $err_msg['common'];
-						?>
-					</div>
-					<div class="profContent_wrapper">
+			<form action="" method="post" enctype="multipart/form-data">
+				<div class="area-msg">
+					<?php 
+					if(!empty($err_msg['common'])) echo $err_msg['common'];
+					?>
+				</div>
+				<div class="profContent_wrapper">
 	<!--------ニックネーム-->
 						<label class="<?php if(!empty($err_msg['name'])) echo 'err'; ?>">
 							<div class="theme-wrapper">
