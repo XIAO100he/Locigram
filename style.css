@@ -184,7 +184,7 @@ footer{
 
 .menu-main{
 	height:100%;
-	width:75%;
+	width:80%;
 	margin:0 auto;
 	overflow: hidden;
 }
@@ -351,11 +351,10 @@ label.err input{
 .my-side_wrapper{
 	width:30%;
 	min-height:640px;
-	margin-top:50px;
 	float:left;
 }
 .side-box{
-	width:70%;
+	width:65%;
 	margin:0 auto;
 	border:1px solid black;
 	border-radius: 5px;
@@ -364,16 +363,17 @@ label.err input{
 	margin-bottom:40px;
 }
 .side-menu{
-	width:150px;
+	width:130px;
 	margin-top:40px;
-}
-.side-menu:hover{
-	cursor: pointer;
-	border-bottom:1px dashed black;
 }
 .side-btn{
 	color:black;
 }
+.side-btn:hover{
+	cursor: pointer;
+	color:#c0c0c0;
+}
+
 /*****************プロフィール編集********************/
 .prof-wrapper{
 	width:70%;
@@ -430,6 +430,23 @@ select{
 }
 
 
+/*****************Locigramとは****************/
+.about-wrapper{
+	width:70%;
+	min-height:580px;
+	margin:0 auto;
+}
+.about-loci{
+	width:200px;
+	padding-top:100px;
+	margin:0 auto;
+}
+.about-cont{
+	margin:0 auto;
+	width:65%;
+	padding-top:50px;
+	line-height: 50px;
+}
 
 
 

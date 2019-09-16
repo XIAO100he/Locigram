@@ -1,7 +1,6 @@
 <header>
 	<div class="header-left">
-		<h1><a href="index.php" class="main-theme">ふるさと.com</a></h1>
-		<p>〜ふるさと納税返礼品の比較サイト〜</p>
+		<h1><a href="index.php" class="main-theme">Locigram</a></h1>
 	</div>
 	<div class="header-right">
 		<?php

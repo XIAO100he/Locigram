@@ -1,9 +1,9 @@
 <footer>
 	<div class="footer-left">
-		<h5>ふるさと.com</h5>
+		<h5>Locigram</h5>
 	</div>
 	<div class="footer-right">
-		© 2019 furusato.com All Rights Reserved.
+		© 2019 locigram.com All Rights Reserved.
 	</div>
 </footer>
 
