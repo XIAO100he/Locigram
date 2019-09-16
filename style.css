@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+	background: #fafafa;
 }
 
 h1,h2,h3,h4,h5,h6,p{
@@ -22,6 +23,7 @@ header{
 	width:100%;
 	overflow: hidden;
 	border-bottom: 1px solid black;
+	background: white;
 }
 .header-left h1{
 	font-weight: bold;
@@ -154,10 +156,10 @@ label.err input{
 footer{
 	height:50px;
 	width:100%;
-	margin-top:50px;
 	overflow: hidden;
 	background: #444;
 	color:white;
+	margin-top:100px;
 }
 .footer-left{
 	font-size: 18px;
@@ -179,6 +181,7 @@ footer{
 	height:60px;
 	width:100%;
 	font-size: 18px;
+	background: white;
 	box-shadow:0 5px 10px rgba(0,0,0,0.3);
 }
 
@@ -210,47 +213,15 @@ i{
 }
 /*****************トップページ********************/
 .index-wrapper{
-	min-height: 580px;
+	min-height: 630px;
+	margin-top:8px;
 }
-.top-image_wrapper{
-	height:400px;
-	width:55%;
-	margin:0 auto;
-	overflow: hidden;
-}
-.swiper-btn_prev{
-	font-size:100px;
-	color:#333;
-	position:absolute;
-	top:250px;
-	left:250px;
-	cursor: pointer;
-}
-.swiper-btn_next{
-	font-size:100px;
-	color:#333;
-	position:absolute;
-	top:250px;
-	right:250px;
-	cursor: pointer;
-}
-.top-images{
-	height:100%;
-	width:100%;
-	margin-top:15px;
-	margin-bottom:15px;
-	float:left;
-}
-.image img{
+.photos-wrapper{
+	width:90%;
 	height:350px;
-	width:100%;
-}
-.image{
-	display: none;
-}
-
-.active{
-	display: block;
+	padding-top:55px;
+	padding-bottom:55px;
+	margin:0 auto;
 }
 
 /*******************退会ページ***********************/
@@ -446,6 +417,27 @@ select{
 	width:65%;
 	padding-top:50px;
 	line-height: 50px;
+}
+
+/*****************投稿写真****************/
+.postCon-wrapper{
+	width:293px;
+	height:310px;
+	float:left;
+	margin-top:28px;
+	margin-left:28px;
+}
+.photo-wrapper{
+	width:293px;
+	height:293px;
+}
+.photo-wrapper img{
+	width:293px;
+	height:293px;
+}
+.placeName-wrapper{
+	width:293px;
+	font-size:15px;
 }
 
 

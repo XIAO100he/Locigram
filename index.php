@@ -30,7 +30,22 @@ require('head.php');
 	require('menu.php');
 	?>
 	<div class="index-wrapper">
-
+		<div class="photos-wrapper">
+			<div class="theme-wrapper">ジャンルテーマ</div>
+			<?php require('photos.php'); ?>
+		</div>
+		<div class="photos-wrapper">
+			<div class="theme-wrapper">ジャンルテーマ</div>
+			<?php require('photos.php'); ?>
+		</div>
+		<div class="photos-wrapper">
+			<div class="theme-wrapper">ジャンルテーマ</div>
+			<?php require('photos.php'); ?>
+		</div>
+		<div class="photos-wrapper">
+			<div class="theme-wrapper">ジャンルテーマ</div>
+			<?php require('photos.php'); ?>
+		</div>
 	</div>
 	<?php
 	require('footer.php');
