@@ -1,4 +1,4 @@
 <div class="postBtn">
-	<p>POST</p>
+	<p class="postBtn-title">POST</p>
 	<i class="fas fa-camera-retro"></i>
 </div>
