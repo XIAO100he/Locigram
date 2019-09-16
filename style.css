@@ -439,32 +439,43 @@ select{
 	width:293px;
 	font-size:15px;
 }
-
+.placeName{
+	color:#555;
+}
 /*****************投稿ボタン****************/
-.sell-btn {
+.postBtn {
 	position: fixed;
-	bottom: -14px;
-	right: -14px;
+	bottom: 60px;
+	right: 50px;
 	z-index: 10;
-	width: 80px;
-	height: 80px;
+	width: 100px;
+	height: 100px;
 	border-radius: 50%;
-	background: $mercari-red;
+	background: #F4A460;
 	color: #fff;
 	text-align: center;
-
-	&_title {
-		margin-top: 14px;
-	}
-
-	&_icon {
-		margin-top: 4px;
-		font-size: 24px;
-	}
 }
 
+.postBtn-title{
+	margin-top: 20px;
+}
 
+.postBtn i{
+	margin-top: 4px;
+	font-size: 30px;
+}
 
+/*****************投稿・編集画面****************/
+.registPost-wrapper{
+	width:70%;
+	height:1700px;
+	float:left;
+}
+.postContent_wrapper{
+	width:80%;
+	margin:0 auto;
+	padding-top:5px;
+}
 
 
 
