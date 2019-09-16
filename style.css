@@ -217,7 +217,7 @@ i{
 	margin-top:8px;
 }
 .photos-wrapper{
-	width:90%;
+	width:68%;
 	height:350px;
 	padding-top:55px;
 	padding-bottom:55px;
@@ -425,7 +425,7 @@ select{
 	height:310px;
 	float:left;
 	margin-top:28px;
-	margin-left:28px;
+	margin-left:20px;
 }
 .photo-wrapper{
 	width:293px;
@@ -440,8 +440,28 @@ select{
 	font-size:15px;
 }
 
+/*****************投稿ボタン****************/
+.sell-btn {
+	position: fixed;
+	bottom: -14px;
+	right: -14px;
+	z-index: 10;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	background: $mercari-red;
+	color: #fff;
+	text-align: center;
 
+	&_title {
+		margin-top: 14px;
+	}
 
+	&_icon {
+		margin-top: 4px;
+		font-size: 24px;
+	}
+}
 
 
 
