@@ -63,7 +63,8 @@ define('MSG10', '古いパスワードが違います');
 define('MSG11', '古いパスワードと同じです');
 define('SUC01', 'パスワードを変更しました');
 define('SUC02', 'プロフィールを変更しました');
-
+define('SUC03', 'メールを送信しました');
+define('SUC04', '登録しました');
 
 
 
@@ -241,6 +242,7 @@ function queryPost($dbh, $sql, $data){
 	debug('クエリ成功。');
 	return $stmt;
 }
+
 //ユーザー情報を取る
 function getUser($u_id){
 	debug('ユーザー情報を取得します');
@@ -261,6 +263,67 @@ function getUser($u_id){
 	}
 }
 
+//ポスト情報を取る
+function getPost($u_id, $p_id){
+	debug('投稿内容を取得します。');
+	debug('ユーザーID：'.$u_id);
+	debug('投稿ID：'.$p_id);
+
+	try {
+		$dbh = dbConnect();
+		$sql = 'SELECT * FROM post WHERE user_id = :u_id AND id = :p_id AND delete_flg = 0';
+		$data = array(':u_id' => $u_id, ':p_id' => $p_id);
+		$stmt = queryPost($dbh, $sql, $data);
+
+		if($stmt){
+			return $stmt->fetch(PDO::FETCH_ASSOC);
+		}else{
+			return false;
+		}
+	} catch (Exception $e) {
+		error_log('エラー発生:' . $e->getMessage());
+	}
+}
+
+//ジャンル情報を取る
+function getGenre(){
+	debug('ジャンル情報を取得します。');
+
+	try {
+		$dbh = dbConnect();
+		$sql = 'SELECT * FROM genre';
+		$data = array();
+		$stmt = queryPost($dbh, $sql, $data);
+
+		if($stmt){
+			return $stmt->fetchAll();
+		}else{
+			return false;
+		}
+	} catch (Exception $e) {
+		error_log('エラー発生:' . $e->getMessage());
+	}
+}
+
+//エリア情報を取る
+function getArea(){
+	debug('エリア情報を取得します。');
+
+	try {
+		$dbh = dbConnect();
+		$sql = 'SELECT * FROM area';
+		$data = array();
+		$stmt = queryPost($dbh, $sql, $data);
+
+		if($stmt){
+			return $stmt->fetchAll();
+		}else{
+			return false;
+		}
+	} catch (Exception $e) {
+		error_log('エラー発生:' . $e->getMessage());
+	}
+}
 
 //================================
 // その他
