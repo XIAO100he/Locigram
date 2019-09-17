@@ -11,7 +11,7 @@ require('auth.php');
 
 $p_id = (!empty($_GET['p_id'])) ? $_GET['p_id']: '';
 $dbFormData = (!empty($p_id)) ? getPost($_SESSION['user_id'], $p_id) : '';
-$edit_flg = (empty($dbFormData)) ? false, true ;
+$edit_flg = (empty($dbFormData)) ? false : true ;
 
 $dbGenreData = getGenre();
 debug('投稿ID：'.$p_id);
@@ -129,10 +129,9 @@ require('head.php');
 <!--		タイトル		-->
 					<label class="<?php if(!empty($err_msg['title'])) echo 'err'; ?>">
 						<div class="theme-wrapper">
-							<p class="sub_theme">タイトル</p>
-							<p class="must"><span>必須</span></p>
+							<p class="sub_theme">タイトル<span class="must">必須</span></p>
 						</div>
-						<input type="text" name="title" placeholder="東京タワー(※場所、お店、イベント名等を入れてください)" value="<?php echo getFormData('title'); ?>">
+						<input type="text" name="title" placeholder="　東京タワー　(※場所名、店名、イベント名等を入れてください)" value="<?php echo getFormData('title'); ?>">
 					</label>
 					<div class="area-msg">
 						<?php
@@ -142,13 +141,12 @@ require('head.php');
 <!--		エリア			-->
 					<label class="<?php if(!empty($err_msg['area_id'])) echo 'err'; ?>">
 						<div class="theme-wrapper">
-							<p class="sub_theme">地域</p>
-							<p class="must"><span>必須</span></p>
+							<p class="sub_theme area">地域<span class="must">必須</span></p>
 						</div>
-						<slect>
+						<select>
 							<option value="0" <?php if(getFormData('area_id') ==0){ echo 'selected'; } ?>> 選択してください</option>
 							<?php
-							foreach($dbCategoryData as $key => $val){
+							foreach($dbAreaData as $key => $val){
 							?>
 							<option value="<?php echo $val['id'] ?>" <?php if(getFormData('area_id') == $val['id'] ) { echo 'selected'; } ?> >
 								<?php echo $val['name']; ?>
@@ -156,7 +154,7 @@ require('head.php');
 							<?php
 							}
 							?>
-						</slect>
+						</select>
 					</label>
 					<div class="area-msg">
 						<?php
@@ -166,13 +164,12 @@ require('head.php');
 <!--		ジャンル			-->
 					<label class="<?php if(!empty($err_msg['genre_id'])) echo 'err'; ?>">
 						<div class="theme-wrapper">
-							<p class="sub_theme">ジャンル</p>
-							<p class="must"><span>必須</span></p>
+							<p class="sub_theme genre">ジャンル<span class="must">必須</span></p>
 						</div>
-						<slect>
+						<select>
 							<option value="0" <?php if(getFormData('genre_id') ==0){ echo 'selected'; } ?>> 選択してください</option>
 							<?php
-							foreach($dbCategoryData as $key => $val){
+							foreach($dbGenreData as $key => $val){
 							?>
 							<option value="<?php echo $val['id'] ?>" <?php if(getFormData('genre_id') == $val['id'] ) { echo 'selected'; } ?> >
 								<?php echo $val['name']; ?>
@@ -180,7 +177,7 @@ require('head.php');
 							<?php
 							}
 							?>
-						</slect>
+						</select>
 					</label>
 					<div class="area-msg">
 						<?php
@@ -190,10 +187,11 @@ require('head.php');
 <!--		コメント			-->
 					<label class="<?php if(!empty($err_msg['comment'])) echo 'err'; ?>">
 						<div class="theme-wrapper">
-							<p class="sub_theme">コメント</p>
+							<p class="sub_theme comment">コメント</p>
 						</div>
 						<textarea name="comment" id="js-count" cols="30" rows="10" style="height:150px;"><?php echo getFormData('comment'); ?></textarea>
 					</label>
+					<p class="counter-text"><span id="js-count-view">0</span>/250文字</p>
 					<div class="area-msg">
 						<?php
 						if(!empty($err_msg['comment'])) echo $err_msg['comment'];
@@ -204,45 +202,47 @@ require('head.php');
 						<p class="sub_theme">写真</p>
 					</div>
 <!--					１枚目-->
-					<div class="photoUp">
-						<label class="area-drop <?php if(!empty($err_msg['pic1'])) echo 'err'; ?>">
-							<input type="hidden" name="MAX_FILE_SIZE" value="3145728">
-							<input type="file" name="pic1" class="input-file">
-							<img src="<?php echo getFormData('pic1'); ?>" alt="" class="prev-img" style="<?php if(empty(getFormData('pic1'))) echo 'display:none;' ?>">
-							１枚目<br>ドラッグ＆ドロップ
-						</label>
-						<div class="area-msg">
-							<?php
-							if(!empty($err_msg['pic1'])) echo $err_msg['pic1'];
-							?>
+					<div class="photos">
+						<div class="photoUp">
+							<label class="area-drop <?php if(!empty($err_msg['pic1'])) echo 'err'; ?>">
+								<input type="hidden" name="MAX_FILE_SIZE" value="3145728">
+								<input type="file" name="pic1" class="input-file">
+								<img src="<?php echo getFormData('pic1'); ?>" alt="" class="prev-img" style="<?php if(empty(getFormData('pic1'))) echo 'display:none;' ?>">
+								<p class="drugdrop">１枚目<br>ドラッグ＆ドロップ</p>
+							</label>
+							<div class="area-msg">
+								<?php
+								if(!empty($err_msg['pic1'])) echo $err_msg['pic1'];
+								?>
+							</div>
 						</div>
-					</div>
-<!--					２枚目-->
-					<div class="photoUp">
-						<label class="area-drop <?php if(!empty($err_msg['pic2'])) echo 'err'; ?>">
-							<input type="hidden" name="MAX_FILE_SIZE" value="3145728">
-							<input type="file" name="pic1" class="input-file">
-							<img src="<?php echo getFormData('pic2'); ?>" alt="" class="prev-img" style="<?php if(empty(getFormData('pic2'))) echo 'display:none;' ?>">
-							２枚目<br>ドラッグ＆ドロップ
-						</label>
-						<div class="area-msg">
-							<?php
-							if(!empty($err_msg['pic2'])) echo $err_msg['pic2'];
-							?>
+	<!--					２枚目-->
+						<div class="photoUp">
+							<label class="area-drop <?php if(!empty($err_msg['pic2'])) echo 'err'; ?>">
+								<input type="hidden" name="MAX_FILE_SIZE" value="3145728">
+								<input type="file" name="pic1" class="input-file">
+								<img src="<?php echo getFormData('pic2'); ?>" alt="" class="prev-img" style="<?php if(empty(getFormData('pic2'))) echo 'display:none;' ?>">
+								<p class="drugdrop">２枚目<br>ドラッグ＆ドロップ</p>
+							</label>
+							<div class="area-msg">
+								<?php
+								if(!empty($err_msg['pic2'])) echo $err_msg['pic2'];
+								?>
+							</div>
 						</div>
-					</div>
-<!--					３枚目-->
-					<div class="photoUp">
-						<label class="area-drop <?php if(!empty($err_msg['pic3'])) echo 'err'; ?>">
-							<input type="hidden" name="MAX_FILE_SIZE" value="3145728">
-							<input type="file" name="pic1" class="input-file">
-							<img src="<?php echo getFormData('pic3'); ?>" alt="" class="prev-img" style="<?php if(empty(getFormData('pic3'))) echo 'display:none;' ?>">
-							３枚目<br>ドラッグ＆ドロップ
-						</label>
-						<div class="area-msg">
-							<?php
-							if(!empty($err_msg['pic3'])) echo $err_msg['pic3'];
-							?>
+	<!--					３枚目-->
+						<div class="photoUp">
+							<label class="area-drop <?php if(!empty($err_msg['pic3'])) echo 'err'; ?>">
+								<input type="hidden" name="MAX_FILE_SIZE" value="3145728">
+								<input type="file" name="pic1" class="input-file">
+								<img src="<?php echo getFormData('pic3'); ?>" alt="" class="prev-img" style="<?php if(empty(getFormData('pic3'))) echo 'display:none;' ?>">
+								<p class="drugdrop">３枚目<br>ドラッグ＆ドロップ</p>
+							</label>
+							<div class="area-msg">
+								<?php
+								if(!empty($err_msg['pic3'])) echo $err_msg['pic3'];
+								?>
+							</div>
 						</div>
 					</div>
 <!--		画像終了-->
