@@ -250,6 +250,7 @@ require('head.php');
 						<div class="change-prf">
 							<input type="submit" class='change-prf-btn' value="変更する">
 						</div>
+<!--						ボタン終了-->
 					</div>
 			</form>
 		</div>
