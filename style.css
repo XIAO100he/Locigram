@@ -318,6 +318,28 @@ label.err input{
 	width:70%;
 	min-height:640px;
 	float:left;
+	margin-top:80px;
+	overflow: hidden;
+}
+.myPost-title{
+	border-left:5px solid #D2B48C;
+	padding-left:5px;
+}
+.a_Post{
+	margin-top:40px;
+	margin-right:30px;
+	float:left;
+}
+
+.a_Post img{
+	width:200px;
+	height:200px;
+}
+.panel-title{
+	width:180px;
+	margin-left:5px;
+	font-size: 16px;
+	color:black;
 }
 /*****************サイドバー********************/
 .my-side_wrapper{
@@ -451,13 +473,12 @@ select{
 	z-index: 10;
 	width: 100px;
 	height: 100px;
-	border-radius: 20%;
-	background: #444;
-	border:3px solid #F5F5DC;
+	border-radius: 50%;
+	background: #D2B48C;
 	text-align: center;
 }
 .post-btn{
-	color:#F5F5DC;
+	color:black;
 }
 
 .postBtn-title{
@@ -570,6 +591,9 @@ form select:hover{
 	border-radius: 4px;
 	cursor: pointer;
 }
+
+
+
 
 
 

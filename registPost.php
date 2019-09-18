@@ -31,19 +31,21 @@ if(!empty($p_id) && empty($dbFormData)){
 if(!empty($_POST)){
 	debug('POST送信があります');
 	debug('POST情報：'.print_r($_POST, true));
-	debug('FILE情報：'.print_r($_FILES, true)); //※
+	debug('FILE情報：'.print_r($_FILES,true)); //※
 	
 	$title = $_POST['title'];
 	$genre = $_POST['genre_id'];
-	$area = $_POST['area'];
+	$area = $_POST['area_id'];
 	$comment = $_POST['comment'];
+	debug('変数定義した');
 	
-	$pic1 = (!empty($_FILES['pic1']['name']) ) ? uploadImg($_FILES['pic1'],'pic1') :''; //※
-	$pic1 = (empty($pic1) && !empty($dbFormData['pic1']) ) ? $dbFormData['pic1'] : $pic1;
-	$pic2 = (!empty($_FILES['pic2']['name']) ) ? uploadImg($_FILES['pic2'],'pic2') :''; //※
-	$pic2 = (empty($pic2) && !empty($dbFormData['pic2']) ) ? $dbFormData['pic2'] : $pic2;
-	$pic3 = (!empty($_FILES['pic3']['name']) ) ? uploadImg($_FILES['pic3'],'pic3') :''; //※
-	$pic3 = (empty($pic3) && !empty($dbFormData['pic3']) ) ? $dbFormData['pic3'] : $pic1;
+	$pic1 = ( !empty($_FILES['pic1']['name']) ) ? uploadImg($_FILES['pic1'],'pic1') : ''; //※
+	$pic1 = ( empty($pic1) && !empty($dbFormData['pic1']) ) ? $dbFormData['pic1'] : $pic1;
+	$pic2 = ( !empty($_FILES['pic2']['name']) ) ? uploadImg($_FILES['pic2'],'pic2') : ''; //※
+	$pic2 = ( empty($pic2) && !empty($dbFormData['pic2']) ) ? $dbFormData['pic2'] : $pic2;
+	$pic3 = ( !empty($_FILES['pic3']['name']) ) ? uploadImg($_FILES['pic3'],'pic3') : ''; //※
+	$pic3 = ( empty($pic3) && !empty($dbFormData['pic3']) ) ? $dbFormData['pic3'] : $pic3;
+	debug('pic関連OK');
 
 	if(empty($dbFormData)){
 		validRequired($title, 'title');
@@ -75,20 +77,20 @@ if(!empty($_POST)){
 		debug('バリデーションOKです');
 		
 		try{
-			$dbh = dbConnetct();
+			$dbh = dbConnect();
 			if($edit_flg){
 				debug('DB更新です');
 				$sql = 'UPDATE post SET title= :title, genre_id = :genre, area_id = :area, comment = :comment, pic1 =:pic1, pic2 = :pic2, pic3 = pic3 WHERE user_id = :u_id AND id = :p_id';
 				$data = array(':title' => $title, ':genre'=> $genre, ':area'=> $area, ':comment' => $comment, ':pic1'=>$pic1, ':pic2'=> $pic2, ':pic3'=> $pic3, ':u_id'=> $_SESSION['user_id'], ':p_id' => $p_id);
 			} else {
 				debug('DB新規登録です');
-				$sql = 'INSERT INTO post(title,genre_id,area_id,comment,pic1,pic2,pic3,user_id,create_data) VALUES (:title,:genre,:area,:comment,:pic1,:pic2,:pic3,:u_id,:date)';
+				$sql = 'insert into post (title, genre_id, area_id, comment, pic1, pic2, pic3, user_id, create_date ) values (:title, :genre, :area, :comment,  :pic1, :pic2, :pic3, :u_id, :date)';
 				$data = array(':title'=>$title, ':genre' =>$genre, ':area'=>$area, ':comment'=>$comment, ':pic1'=>$pic1, ':pic2'=>$pic2, ':pic3'=>$pic3, ':u_id'=>$_SESSION['user_id'], ':date'=> date('Y-m-d H:i:s'));
 			}
 			debug('SQL:'.$sql);
 			debug('流し込みデータ：'.print_r($data,true));
 			
-			$stmt = queryPost($dbh,$sql,$data);
+			$stmt = queryPost($dbh, $sql, $data);
 			
 			if($stmt){
 				$_SESSION['msg_success'] = SUC04;
@@ -118,7 +120,7 @@ require('head.php');
 	<div class="main-wrapper">
 		<h2><?php echo (!$edit_flg) ? '投稿する' : '投稿内容を編集する'; ?></h2>
 		<div class="registPost-wrapper">
-			<form action="" method="post">
+			<form action="" method="post" enctype="multipart/form-data">
 <!--			全体のエラーメッセージ-->
 				<div class="area-msg">
 					<?php 
@@ -143,7 +145,7 @@ require('head.php');
 						<div class="theme-wrapper">
 							<p class="sub_theme area">地域<span class="must">必須</span></p>
 						</div>
-						<select>
+						<select name="area_id">
 							<option value="0" <?php if(getFormData('area_id') ==0){ echo 'selected'; } ?>> 選択してください</option>
 							<?php
 							foreach($dbAreaData as $key => $val){
@@ -166,7 +168,7 @@ require('head.php');
 						<div class="theme-wrapper">
 							<p class="sub_theme genre">ジャンル<span class="must">必須</span></p>
 						</div>
-						<select>
+						<select name="genre_id">
 							<option value="0" <?php if(getFormData('genre_id') ==0){ echo 'selected'; } ?>> 選択してください</option>
 							<?php
 							foreach($dbGenreData as $key => $val){
@@ -220,7 +222,7 @@ require('head.php');
 						<div class="photoUp">
 							<label class="area-drop <?php if(!empty($err_msg['pic2'])) echo 'err'; ?>">
 								<input type="hidden" name="MAX_FILE_SIZE" value="3145728">
-								<input type="file" name="pic1" class="input-file">
+								<input type="file" name="pic2" class="input-file">
 								<img src="<?php echo getFormData('pic2'); ?>" alt="" class="prev-img" style="<?php if(empty(getFormData('pic2'))) echo 'display:none;' ?>">
 								<p class="drugdrop">２枚目<br>ドラッグ＆ドロップ</p>
 							</label>
@@ -234,7 +236,7 @@ require('head.php');
 						<div class="photoUp">
 							<label class="area-drop <?php if(!empty($err_msg['pic3'])) echo 'err'; ?>">
 								<input type="hidden" name="MAX_FILE_SIZE" value="3145728">
-								<input type="file" name="pic1" class="input-file">
+								<input type="file" name="pic3" class="input-file">
 								<img src="<?php echo getFormData('pic3'); ?>" alt="" class="prev-img" style="<?php if(empty(getFormData('pic3'))) echo 'display:none;' ?>">
 								<p class="drugdrop">３枚目<br>ドラッグ＆ドロップ</p>
 							</label>
