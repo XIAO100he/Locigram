@@ -30,6 +30,9 @@ require('head.php');
 <?php
 require('header.php');
 ?>
+<?php
+require('menu.php');
+?>
 <!--成功時のメッセージ-->
 
 <!--メイン箇所-->
