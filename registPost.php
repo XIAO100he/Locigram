@@ -200,53 +200,52 @@ require('head.php');
 						?>
 					</div>
 <!--		画像			-->
-					<div class="theme-wrapper">
-						<p class="sub_theme">写真</p>
-					</div>
 <!--					１枚目-->
-					<div class="photos">
-						<div class="photoUp">
+						<div class="imgDrop-container">
+							画像１
 							<label class="area-drop <?php if(!empty($err_msg['pic1'])) echo 'err'; ?>">
 								<input type="hidden" name="MAX_FILE_SIZE" value="3145728">
 								<input type="file" name="pic1" class="input-file">
 								<img src="<?php echo getFormData('pic1'); ?>" alt="" class="prev-img" style="<?php if(empty(getFormData('pic1'))) echo 'display:none;' ?>">
-								<p class="drugdrop">１枚目<br>ドラッグ＆ドロップ</p>
+								ドラッグ＆ドロップ
 							</label>
 							<div class="area-msg">
-								<?php
+								<?php 
 								if(!empty($err_msg['pic1'])) echo $err_msg['pic1'];
 								?>
 							</div>
 						</div>
-	<!--					２枚目-->
-						<div class="photoUp">
+<!--					２枚目-->
+						<div class="imgDrop-container">
+							画像２
 							<label class="area-drop <?php if(!empty($err_msg['pic2'])) echo 'err'; ?>">
 								<input type="hidden" name="MAX_FILE_SIZE" value="3145728">
 								<input type="file" name="pic2" class="input-file">
 								<img src="<?php echo getFormData('pic2'); ?>" alt="" class="prev-img" style="<?php if(empty(getFormData('pic2'))) echo 'display:none;' ?>">
-								<p class="drugdrop">２枚目<br>ドラッグ＆ドロップ</p>
+								ドラッグ＆ドロップ
 							</label>
 							<div class="area-msg">
-								<?php
+								<?php 
 								if(!empty($err_msg['pic2'])) echo $err_msg['pic2'];
 								?>
 							</div>
 						</div>
-	<!--					３枚目-->
-						<div class="photoUp">
+<!--					３枚目-->
+						<div class="imgDrop-container">
+							画像３
 							<label class="area-drop <?php if(!empty($err_msg['pic3'])) echo 'err'; ?>">
 								<input type="hidden" name="MAX_FILE_SIZE" value="3145728">
 								<input type="file" name="pic3" class="input-file">
 								<img src="<?php echo getFormData('pic3'); ?>" alt="" class="prev-img" style="<?php if(empty(getFormData('pic3'))) echo 'display:none;' ?>">
-								<p class="drugdrop">３枚目<br>ドラッグ＆ドロップ</p>
+								ドラッグ＆ドロップ
 							</label>
 							<div class="area-msg">
-								<?php
+								<?php 
 								if(!empty($err_msg['pic3'])) echo $err_msg['pic3'];
 								?>
 							</div>
 						</div>
-					</div>
+
 <!--		画像終了-->
 <!--				ボタン-->
 					<div class="photoPost">
@@ -263,4 +262,3 @@ require('head.php');
 	<?php
 	require('footer.php'); 
 	?>
-</body>
