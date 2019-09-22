@@ -7,11 +7,9 @@ debug('「　マイページ　');
 debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
 debugLogStart();
 
-//================================
-// 画面処理
-//================================
-//ログイン認証
 require('auth.php');
+
+
 ?>
 
 <!------------------------ビュー---------------------------------->
@@ -30,18 +28,6 @@ require('head.php');
 	require('menu.php');
 	?>
 	<div class="index-wrapper">
-		<div class="photos-wrapper">
-			<div class="theme-wrapper">ジャンルテーマ</div>
-			<?php require('photos.php'); ?>
-		</div>
-		<div class="photos-wrapper">
-			<div class="theme-wrapper">ジャンルテーマ</div>
-			<?php require('photos.php'); ?>
-		</div>
-		<div class="photos-wrapper">
-			<div class="theme-wrapper">ジャンルテーマ</div>
-			<?php require('photos.php'); ?>
-		</div>
 		<div class="photos-wrapper">
 			<div class="theme-wrapper">ジャンルテーマ</div>
 			<?php require('photos.php'); ?>

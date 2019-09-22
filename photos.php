@@ -1,24 +1,34 @@
+<?php
+
+
+debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
+debug('「　トップの画像　');
+debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
+debugLogStart();
+
+$dbAllPosts = getPosts();
+
+?>
+
+
+
+<?php
+if(!empty($dbAllPosts)):
+foreach($dbAllPosts as $key => $val ):
+?>
+
 <div class="postCon-wrapper">
 	<div class="photo-wrapper">
-		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Bungo_ohno_harajirinotaki_02.jpg/220px-Bungo_ohno_harajirinotaki_02.jpg" alt="">
-	</div>
-	<div class="placeName-wrapper">
-		<p class="placeName"><span>@</span>場所の名前</p>
-	</div>
-</div>
-<div class="postCon-wrapper">
-	<div class="photo-wrapper">
-		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Bungo_ohno_harajirinotaki_02.jpg/220px-Bungo_ohno_harajirinotaki_02.jpg" alt="">
-	</div>
-	<div class="placeName-wrapper">
-		<p class="placeName"><span>@</span>場所の名前</p>
+		<img src="<?php echo showImg(sanitize($val['pic1'])); ?>" alt="<?php echo sanitize($val['name']); ?>" alt="">
+		<a href="registPost.php<?php echo (!empty(appendGetParam())) ? appendGetParam().'&p_id='.$val['id'] : '?p_id='.$val['id']; ?>" class="panel">
+			<div class="panel-body">
+				<p class="placeName"><span>@</span> <?php echo sanitize($val['title']); ?></p>
+			</div>
+		</a>
 	</div>
 </div>
-<div class="postCon-wrapper">
-	<div class="photo-wrapper">
-		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Bungo_ohno_harajirinotaki_02.jpg/220px-Bungo_ohno_harajirinotaki_02.jpg" alt="">
-	</div>
-	<div class="placeName-wrapper">
-		<p class="placeName"><span>@</span>場所の名前</p>
-	</div>
-</div>
+
+<?php
+endforeach;
+endif;
+?>
