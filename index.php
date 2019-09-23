@@ -19,8 +19,8 @@ if(!is_int($currentPageNum)){
 }
 
 $listSpan =12;
-$currentMinNum = (($currentPageNum-1)*$lisnSpan);
-$dbPostData = getPostList($currentMinMun);
+$currentMinNum = (($currentPageNum-1)*$listSpan);
+$dbPostData = getPostList($currentMinNum);
 
 
 
@@ -42,6 +42,9 @@ require('head.php');
 	require('menu.php');
 	?>
 	<div class="index-wrapper">
+		<div class="PostNum">
+			<span class="num"><?php echo (!empty($dbPostData['data'])) ? $currentMinNum+1 : 0 ; ?></span> - <span class="num"><?php echo $currentMinNum+count($dbPostData['data']); ?></span>件/ <span class="num"><?php echo sanitize($dbPostData['total']); ?></span>件中
+		</div>
 		<div class="photos-wrapper">
 			<div class="theme-wrapper">すべての投稿</div>
 			<?php require('photos.php'); ?>

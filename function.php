@@ -381,8 +381,8 @@ function getPostList($currentMinNum =1, $span=12){
 		} else {
 			return false;
 		}
-	} catch(Exception, $e){
-		error_log('エラー発生：'.$e-> getMessage());
+	}  catch (Exception $e) {
+		error_log('エラー発生:' . $e->getMessage());
 	}
 }
 
