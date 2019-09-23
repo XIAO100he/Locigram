@@ -11,7 +11,7 @@ require('auth.php');
 
 $u_id = $_SESSION['user_id'];
 
-$postData = getMyPosts($u_id);
+$postData = getMyPosts3($u_id);
 
 debug('取得した投稿データ：'.print_r($postData,true));
 
