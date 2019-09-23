@@ -352,13 +352,68 @@ function getArea(){
 	}
 }
 
+//投稿内容をリストとして取得（トップページ用）
+function getPostList($currentMinNum =1, $span=12){
+	debug('投稿内容を取得します');
+	try{
+		$dbh = dbConnect();
+		$sql = 'SELECT id FROM post';
+		$data = array();
+		$stmt = queryPost($dbh,$sql,$data);
+		//総件数
+		$rst['total'] = $stmt->rowCount();
+		//総ページ数ceilは切り上げ関数
+		$rst['total_page'] = ceil($rst['total']/$span);
+		if($stmt){
+			return false;
+		}
+		
+		//ページング用のSQL
+		$sql ='SELECT * FROM post';
+		$sql ='LIMIT'.$span.'OFFSET'.$currentMinNum;
+		$data = array();
+		debug('SQL:'.$sql);
+		$stmt = queryPost($dbh,$sql,$data);
+		
+		if($stmt){
+			$rst['data']=$stmt->fetchAll();
+			return $rst;
+		} else {
+			return false;
+		}
+	} catch(Exception, $e){
+		error_log('エラー発生：'.$e-> getMessage());
+	}
+}
+
+//自分の投稿全て取得
 function getMyPosts($u_id){
+	debug('自分の商品情報を取得します。');
+	debug('ユーザーID：'.$u_id);
+
+	try {
+		$dbh = dbConnect();
+		$sql = 'SELECT * FROM post WHERE user_id = :u_id AND delete_flg = 0';
+		$data = array(':u_id' => $u_id);
+		$stmt = queryPost($dbh, $sql, $data);
+
+		if($stmt){
+			return $stmt->fetchAll();
+		}else{
+			return false;
+		}
+	} catch (Exception $e) {
+		error_log('エラー発生:' . $e->getMessage());
+	}
+}
+//マイページ用　最新３件だけ取得
+function getMyPosts3($u_id){
 	debug('自分の商品情報を取得します。');
 	debug('ユーザーID：'.$u_id);
 	
 	try {
 		$dbh = dbConnect();
-		$sql = 'SELECT * FROM post WHERE user_id = :u_id AND delete_flg = 0';
+		$sql = 'SELECT * FROM post WHERE user_id = :u_id AND delete_flg = 0 ORDER BY create_date DESC limit 3';
 		$data = array(':u_id' => $u_id);
 		$stmt = queryPost($dbh, $sql, $data);
 

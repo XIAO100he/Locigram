@@ -9,6 +9,20 @@ debugLogStart();
 
 require('auth.php');
 
+$currentPageNum = (!empty($_GET['p'])) ? $_GET['p'] : 1 ;
+//$category = (!empty($_GET['c_id'])) ? $_GET['c_id'] : '';
+//$sort =(!empty($_GET['sort'])) ? $_GET['sort'] : '';
+
+if(!is_int($currentPageNum)){
+	error_log('エラー発生：指定ページに不正な値が入りました');
+	header('Location:index.php');
+}
+
+$listSpan =12;
+$currentMinNum = (($currentPageNum-1)*$lisnSpan);
+$dbPostData = getPostList($currentMinMun);
+
+
 
 ?>
 
@@ -29,7 +43,7 @@ require('head.php');
 	?>
 	<div class="index-wrapper">
 		<div class="photos-wrapper">
-			<div class="theme-wrapper">ジャンルテーマ</div>
+			<div class="theme-wrapper">すべての投稿</div>
 			<?php require('photos.php'); ?>
 		</div>
 	</div>
