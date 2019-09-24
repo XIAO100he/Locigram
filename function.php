@@ -357,34 +357,55 @@ function getPostList($currentMinNum =1, $span=12){
 	debug('投稿内容を取得します');
 	try{
 		$dbh = dbConnect();
-		$sql = 'SELECT id FROM post';
+		$sql = 'SELECT id FROM post order by create_date';
 		$data = array();
-		$stmt = queryPost($dbh,$sql,$data);
-		//総件数
-		$rst['total'] = $stmt->rowCount();
-		//総ページ数ceilは切り上げ関数
-		$rst['total_page'] = ceil($rst['total']/$span);
-		if($stmt){
+		$stmt = queryPost($dbh, $sql, $data);
+		$rst['total'] = $stmt->rowCount(); //総レコード数
+		$rst['total_page'] = ceil($rst['total']/$span); //総ページ数 ceilは切り上げ
+		if(!$stmt){
 			return false;
 		}
+
 		
 		//ページング用のSQL
-		$sql ='SELECT * FROM post';
-		$sql ='LIMIT'.$span.'OFFSET'.$currentMinNum;
+		$sql .= ' LIMIT '.$span.' OFFSET '.$currentMinNum;
 		$data = array();
-		debug('SQL:'.$sql);
-		$stmt = queryPost($dbh,$sql,$data);
+		debug('SQL：'.$sql);
+		$stmt = queryPost($dbh, $sql, $data);
 		
 		if($stmt){
-			$rst['data']=$stmt->fetchAll();
+			// クエリ結果のデータを全レコードを格納
+			$rst['data'] = $stmt->fetchAll();
 			return $rst;
-		} else {
+		}else{
 			return false;
 		}
-	}  catch (Exception $e) {
+	} catch (Exception $e) {
 		error_log('エラー発生:' . $e->getMessage());
 	}
 }
+
+function getPostOne($p_id){
+	debug('投稿情報を取得します。');
+	debug('投稿ID：'.$p_id);
+
+	try {
+		$dbh = dbConnect();
+		$sql = 'SELECT p.id , p.title , p.area_id, p.genre_id, p.comment, p.pic1, p.pic2, p.pic3, p.user_id, p.create_date, p.update_date, a.name AS area, g.name AS genre
+             FROM post AS p LEFT JOIN area AS a ON (p.area_id = a.id) LEFT JOIN genre AS g ON (p.genre_id = g.id) WHERE p.id = :p_id AND p.delete_flg = 0';
+		$data = array(':p_id' => $p_id);
+		$stmt = queryPost($dbh, $sql, $data);
+
+		if($stmt){
+			return $stmt->fetch(PDO::FETCH_ASSOC);
+		}else{
+			return false;
+		}
+	} catch (Exception $e) {
+		error_log('エラー発生:' . $e->getMessage());
+	}
+}
+
 
 //自分の投稿全て取得
 function getMyPosts($u_id){
@@ -510,7 +531,7 @@ function uploadImg($file,$key){
 //画像表示用関数
 function showImg($path){
 	if(empty($path)){
-		return 'img/sample-img.png';
+		return 'image/sample-img.png';
 	}else{
 		return $path;
 	}
@@ -529,5 +550,51 @@ function appendGetParam($arr_del_key = array()){
 		return $str;
 	}
 }
+
+//ページネーション
+function pagination($currentPageNum, $totalPageNum, $link='', $pageColNum = 5){
+	// 現在のページが、総ページ数と同じ　かつ　総ページ数が表示項目数以上なら、左にリンク４個出す
+	if( $currentPageNum == $totalPageNum && $totalPageNum > $pageColNum){
+		$minPageNum = $currenPageNum -4;
+		$maxPageNum = $currentPageNum;
+	// 現在のページが、総ページ数の１ページ前なら、左にリンク３個、右に１個出す
+	}elseif( $currentPageNum == ($totalPageNum-1) && $totalPageNum > $pageColNum){
+		$minPageNum = $currenPageNum - 3;
+		$maxPageNum = $currentPageNum + 1;
+	// 現ページが2の場合は左にリンク１個、右にリンク３個だす。
+	} elseif ( $currentPageNum ==2 && $totalPageNum > $pageColNum){
+		$minPageNum = $currenPageNum - 1;
+		$maxPageNum = $currentPageNum + 3;
+	// 現ページが1の場合は左に何も出さない。右に５個出す。
+	} elseif( $currentPageNum ==1 && $totalPageNum > $pageColNum){
+		$minPageNum = $currenPageNum;
+		$maxPageNum = 5;
+	// 総ページ数が表示項目数より少ない場合は、総ページ数をループのMax、ループのMinを１に設定
+	} elseif ($totalPageNum < $pageColNum){
+		$minPageNum =1;
+		$maxPageNum = $totalPageNum;
+	//それ以外は左に２個出す
+	} else {
+		$minPageNum = $currentPageNum -2;
+		$maxPageNum = $currentPageNum +2;
+	}
+	
+		echo '<ul class="pagination-list">';
+
+			if( $currentPageNum != 1){
+				echo '<li class="list-post><a href="?p=1'.$link.'">&lt; </a></li>';
+			}
+			for($i= $minPageNum; $i <= $maxPageNum; $i++){
+				echo '<li class="list-post ';
+				if($currentPageNum == $i){ echo 'active'; }
+				echo '"><a href="?p='.$i.$link.'">'.$i.'</a></li>';
+			}
+			if($currentPageNum != $maxPageNum && $maxPageNum >1){
+				echo '<li class="list-post"><a href="_p'.$maxPageNum.$link.'">&gt;</a></li>';
+			}
+
+		echo '</ul>';
+}
+
 
 ?>
