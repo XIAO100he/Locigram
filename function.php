@@ -353,7 +353,7 @@ function getArea(){
 }
 
 //投稿内容をリストとして取得（トップページ用）
-function getPostList($currentMinNum =1, $span=12){
+function getPostList($currentMinNum = 1, $span = 12){
 	debug('投稿内容を取得します');
 	try{
 		$dbh = dbConnect();
@@ -366,7 +366,6 @@ function getPostList($currentMinNum =1, $span=12){
 			return false;
 		}
 
-		
 		//ページング用のSQL
 		$sql .= ' LIMIT '.$span.' OFFSET '.$currentMinNum;
 		$data = array();
@@ -554,46 +553,48 @@ function appendGetParam($arr_del_key = array()){
 //ページネーション
 function pagination($currentPageNum, $totalPageNum, $link='', $pageColNum = 5){
 	// 現在のページが、総ページ数と同じ　かつ　総ページ数が表示項目数以上なら、左にリンク４個出す
-	if( $currentPageNum == $totalPageNum && $totalPageNum > $pageColNum){
+	if( $currentPageNum == $totalPageNum && $totalPageNum >= $pageColNum){
 		$minPageNum = $currenPageNum -4;
 		$maxPageNum = $currentPageNum;
 	// 現在のページが、総ページ数の１ページ前なら、左にリンク３個、右に１個出す
-	}elseif( $currentPageNum == ($totalPageNum-1) && $totalPageNum > $pageColNum){
+	}elseif( $currentPageNum == ($totalPageNum-1) && $totalPageNum >= $pageColNum){
 		$minPageNum = $currenPageNum - 3;
 		$maxPageNum = $currentPageNum + 1;
 	// 現ページが2の場合は左にリンク１個、右にリンク３個だす。
-	} elseif ( $currentPageNum ==2 && $totalPageNum > $pageColNum){
+	} elseif( $currentPageNum ==2 && $totalPageNum >= $pageColNum){
 		$minPageNum = $currenPageNum - 1;
 		$maxPageNum = $currentPageNum + 3;
 	// 現ページが1の場合は左に何も出さない。右に５個出す。
-	} elseif( $currentPageNum ==1 && $totalPageNum > $pageColNum){
+	} elseif( $currentPageNum ==1 && $totalPageNum >= $pageColNum){
 		$minPageNum = $currenPageNum;
 		$maxPageNum = 5;
 	// 総ページ数が表示項目数より少ない場合は、総ページ数をループのMax、ループのMinを１に設定
 	} elseif ($totalPageNum < $pageColNum){
 		$minPageNum =1;
 		$maxPageNum = $totalPageNum;
+	}elseif($totalPageNum < $pageColNum){
+		$minPageNum = 1;
 	//それ以外は左に２個出す
 	} else {
 		$minPageNum = $currentPageNum -2;
 		$maxPageNum = $currentPageNum +2;
 	}
-	
-		echo '<ul class="pagination-list">';
 
-			if( $currentPageNum != 1){
-				echo '<li class="list-post><a href="?p=1'.$link.'">&lt; </a></li>';
-			}
-			for($i= $minPageNum; $i <= $maxPageNum; $i++){
-				echo '<li class="list-post ';
-				if($currentPageNum == $i){ echo 'active'; }
-				echo '"><a href="?p='.$i.$link.'">'.$i.'</a></li>';
-			}
-			if($currentPageNum != $maxPageNum && $maxPageNum >1){
-				echo '<li class="list-post"><a href="_p'.$maxPageNum.$link.'">&gt;</a></li>';
-			}
+	echo '<ul class="pagination-list">';
 
-		echo '</ul>';
+		if( $currentPageNum != 1){
+			echo '<li class="list-post"><a href="?p=1'.$link.'">&lt;</a></li>';
+		}
+		for($i= $minPageNum; $i <= $maxPageNum; $i++){
+			echo '<li class="list-post ';
+			if($currentPageNum == $i){ echo 'active'; }
+			echo '"><a href="?p='.$i.$link.'">'.$i.'</a></li>';
+		}
+		if($currentPageNum != $maxPageNum && $maxPageNum >1){
+			echo '<li class="list-post"><a href="?p='.$maxPageNum.$link.'">&gt;</a></li>';
+		}
+
+	echo '</ul>';
 }
 
 

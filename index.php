@@ -18,8 +18,10 @@ if(!is_int($currentPageNum)){
 	header('Location:index.php');
 }
 
-$listSpan =12;
+$listSpan = 12;
+
 $currentMinNum = (($currentPageNum-1)*$listSpan);
+
 $dbPostData = getPostList($currentMinNum);
 
 
