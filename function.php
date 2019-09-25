@@ -293,25 +293,6 @@ function getPost($u_id, $p_id){
 	}
 }
 
-//全てのポスト情報を取る
-function getPosts(){
-	debug('全ての投稿内容を取得します');
-	try{
-		$dbh = dbConnect();
-		$sql = 'SELECT * FROM post';
-		$data = array();
-		$stmt = queryPost($dbh, $sql, $data);
-		
-		if($stmt){
-			return $stmt->fetchAll();
-		}else{
-			return false;
-		}
-	} catch (Exception $e) {
-		error_log('エラー発生:' . $e->getMessage());
-	}
-}
-
 //ジャンル情報を取る
 function getGenre(){
 	debug('ジャンル情報を取得します。');
@@ -357,7 +338,7 @@ function getPostList($currentMinNum = 1, $span = 12){
 	debug('投稿内容を取得します');
 	try{
 		$dbh = dbConnect();
-		$sql = 'SELECT id FROM post order by create_date';
+		$sql = 'SELECT * FROM post order by create_date';
 		$data = array();
 		$stmt = queryPost($dbh, $sql, $data);
 		$rst['total'] = $stmt->rowCount(); //総レコード数

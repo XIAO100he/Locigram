@@ -6,8 +6,7 @@ debug('「　トップの画像　');
 debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
 debugLogStart();
 
-$dbAllPosts = getPosts();
-debug('ポストの中身：'.print_r($dbAllPosts,true));
+$dbPostData = getPostList($currentMinNum);
 
 debug('画面表示処理終了 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
 ?>
@@ -16,8 +15,8 @@ debug('画面表示処理終了 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 <?php
-if(!empty($dbAllPosts)):
-foreach($dbAllPosts as $key => $val ):
+if(!empty($dbPostData)):
+foreach($dbPostData as $key => $val ):
 ?>
 <div class="postCon-wrapper">
 	<div class="photo-wrapper">

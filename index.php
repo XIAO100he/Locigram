@@ -9,7 +9,7 @@ debugLogStart();
 
 require('auth.php');
 
-$currentPageNum = (!empty($_GET['p'])) ? $_GET['p'] : 1 ;
+$currentPageNum = (!empty($_GET['p'])) ? $_GET['p'] : 1;
 //$category = (!empty($_GET['c_id'])) ? $_GET['c_id'] : '';
 //$sort =(!empty($_GET['sort'])) ? $_GET['sort'] : '';
 
@@ -23,7 +23,6 @@ $listSpan = 12;
 $currentMinNum = (($currentPageNum-1)*$listSpan);
 
 $dbPostData = getPostList($currentMinNum);
-
 
 debug('画面表示処理終了 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
 ?>
@@ -52,7 +51,23 @@ require('head.php');
 			</div>
 <!--			投稿写真-->
 			<div class="photos_wrapper">
-				<?php require('photos.php'); ?>
+				<?php
+				foreach($dbPostData['data'] as $key => $val ):
+				?>
+				<div class="postCon-wrapper">
+					<div class="photo-wrapper">
+						<a href="postDetail.php<?php echo (!empty(appendGetParam())) ? appendGetParam().'&p_id='.$val['id'] : '?p_id='.$val['id']; ?>" class="panel">
+							<img src="<?php echo showImg(sanitize($val['pic1'])); ?>" alt="<?php echo sanitize($val['title']); ?>" alt="">
+							<div class="panel-body">
+								<p class="placeName"><span>@</span> <?php echo sanitize($val['title']); ?></p>
+								<p class="postUserName"></p>
+							</div>
+						</a>
+					</div>
+				</div>
+				<?php
+				endforeach;
+				?>
 			</div>
 <!--			ページネーション-->
 			<div class="pagination">
