@@ -13,11 +13,10 @@ $currentPageNum = (!empty($_GET['p'])) ? $_GET['p'] : 1;
 //$category = (!empty($_GET['c_id'])) ? $_GET['c_id'] : '';
 //$sort =(!empty($_GET['sort'])) ? $_GET['sort'] : '';
 
-if(!is_int($currentPageNum)){
-	error_log('エラー発生：指定ページに不正な値が入りました');
-	header('Location:index.php');
+if(!is_int((int)$currentPageNum)){
+	error_log('エラー発生:指定ページに不正な値が入りました');
+	header("Location:index.php"); //トップページへ
 }
-
 $listSpan = 12;
 
 $currentMinNum = (($currentPageNum-1)*$listSpan);

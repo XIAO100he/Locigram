@@ -338,7 +338,7 @@ function getPostList($currentMinNum = 1, $span = 12){
 	debug('投稿内容を取得します');
 	try{
 		$dbh = dbConnect();
-		$sql = 'SELECT * FROM post order by create_date';
+		$sql = 'SELECT id FROM post order by create_date';
 		$data = array();
 		$stmt = queryPost($dbh, $sql, $data);
 		$rst['total'] = $stmt->rowCount(); //総レコード数
@@ -348,6 +348,7 @@ function getPostList($currentMinNum = 1, $span = 12){
 		}
 
 		//ページング用のSQL
+		$sql = 'SELECT * FROM post';
 		$sql .= ' LIMIT '.$span.' OFFSET '.$currentMinNum;
 		$data = array();
 		debug('SQL：'.$sql);
@@ -363,6 +364,58 @@ function getPostList($currentMinNum = 1, $span = 12){
 	} catch (Exception $e) {
 		error_log('エラー発生:' . $e->getMessage());
 	}
+}
+
+function getProductList($currentMinNum = 1, $span = 20){
+  debug('商品情報を取得します。');
+  //例外処理
+  try {
+    // DBへ接続
+    $dbh = dbConnect();
+    // 件数用のSQL文作成
+    $sql = 'SELECT id FROM product';
+    $data = array();
+    // クエリ実行
+    $stmt = queryPost($dbh, $sql, $data);
+    $rst['total'] = $stmt->rowCount(); //総レコード数
+    $rst['total_page'] = ceil($rst['total']/$span); //総ページ数
+    if(!$stmt){
+      return false;
+    }
+    
+    // ページング用のSQL文作成
+    $sql = 'SELECT * FROM product';
+//    if(!empty($category)) $sql .= ' WHERE category = '.$category;
+//    if(!empty($sort)){
+//      switch($sort){
+//        case 1:
+//          $sql .= ' ORDER BY price ASC';
+//          break;
+//        case 2:
+//          $sql .= ' ORDER BY price DESC';
+//          break;
+//        case 3:
+//          $sql .= ' ORDER BY create_date DESC';
+//          break;
+//      }
+//    } 
+    $sql .= ' LIMIT '.$span.' OFFSET '.$currentMinNum;
+    $data = array();
+    debug('SQL：'.$sql);
+    // クエリ実行
+    $stmt = queryPost($dbh, $sql, $data);
+
+    if($stmt){
+      // クエリ結果のデータを全レコードを格納
+      $rst['data'] = $stmt->fetchAll();
+      return $rst;
+    }else{
+      return false;
+    }
+
+  } catch (Exception $e) {
+    error_log('エラー発生:' . $e->getMessage());
+  }
 }
 
 function getPostOne($p_id){
@@ -562,7 +615,6 @@ function pagination($currentPageNum, $totalPageNum, $link='', $pageColNum = 5){
 	}
 
 	echo '<ul class="pagination-list">';
-
 		if( $currentPageNum != 1){
 			echo '<li class="list-post"><a href="?p=1'.$link.'">&lt;</a></li>';
 		}
@@ -571,10 +623,9 @@ function pagination($currentPageNum, $totalPageNum, $link='', $pageColNum = 5){
 			if($currentPageNum == $i){ echo 'active'; }
 			echo '"><a href="?p='.$i.$link.'">'.$i.'</a></li>';
 		}
-		if($currentPageNum != $maxPageNum && $maxPageNum >1){
+		if($currentPageNum != $maxPageNum && $maxPageNum > 1){
 			echo '<li class="list-post"><a href="?p='.$maxPageNum.$link.'">&gt;</a></li>';
 		}
-
 	echo '</ul>';
 }
 
