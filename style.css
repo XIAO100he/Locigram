@@ -4,7 +4,7 @@ body {
 	background: #fafafa;
 }
 
-h1,h2,h3,h4,h5,h6,p{
+h1,h2,h3,h4,h5,h6,p {
   margin: 0;
   padding: 0;
 }
@@ -223,7 +223,7 @@ i{
 .allPost-wrapper{
 	width:68%;
 	height:100%;
-	padding-top:55px;
+	padding-top:10px;
 	margin:0 auto;
 	position: relative;
 }
@@ -473,6 +473,7 @@ label.err input{
 .a_Post img{
 	width:200px;
 	height:200px;
+	object-fit: cover;
 }
 .panel-title{
 	width:180px;
@@ -565,7 +566,7 @@ select{
 
 /*****************Locigramとは****************/
 .about-wrapper{
-	width:70%;
+	width:68%;
 	min-height:580px;
 	margin:0 auto;
 }
@@ -589,8 +590,9 @@ select{
 	height:310px;
 	float:left;
 	margin-top:40px;
-	margin-bottom:30px;
+	margin-bottom:50px;
 	margin-left:20px;
+	border: 1px solid transparent;
 }
 .photo-wrapper{
 	width:293px;
@@ -599,28 +601,29 @@ select{
 .photo-wrapper img{
 	width:293px;
 	height:293px;
-}
-.placeName-wrapper{
-	width:293px;
-	font-size:15px;
+	object-fit: cover;
 }
 .placeName{
+	width:200px;
+	font-size:15px;
+	overflow: hidden;
 	color:#555;
+	float:left;
 }
 /*****************投稿ボタン****************/
 .postBtn {
 	position: fixed;
-	top: 150px;
+	top: 200px;
 	right: 50px;
 	z-index: 10;
-	width: 100px;
-	height: 100px;
+	width: 120px;
+	height: 120px;
 	border-radius: 50%;
-	background: #CC9966;
+	background: #DEB887;
 	text-align: center;
 }
 .post-btn{
-	color:black;
+	color:#333;
 }
 
 .postBtn-title{
@@ -629,7 +632,7 @@ select{
 
 .postBtn i{
 	margin-top: 4px;
-	font-size: 30px;
+	font-size: 40px;
 }
 
 /*****************投稿・編集画面****************/
@@ -728,8 +731,20 @@ form select:hover{
 	cursor: pointer;
 }
 
-
-
+/*****************いいね****************/
+.icn-like{
+	display: block;
+	float:right;
+	color: #ddd;
+	padding-top:5px;
+	font-size:20px;
+}
+.icn-like:hover{
+	cursor: pointer;
+}
+.icn-like.active{
+	color: #FF82B2;
+}
 
 
 

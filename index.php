@@ -62,6 +62,7 @@ require('head.php');
 								<p class="postUserName"></p>
 							</div>
 						</a>
+						<span><i class="fa fa-heart icn-like js-click-like <?php if(isLike($_SESSION['user_id'],$dbPostData['id'])) { echo 'active'; } ?>" aria-hidden="true" data-postid="<?php echo sanitize($dbPostData['id']); ?>"> </i></span>
 					</div>
 				</div>
 				<?php

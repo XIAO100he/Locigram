@@ -236,6 +236,7 @@ function dbConnect(){
 	$dbh = new PDO($dsn, $user, $password, $options);
 	return $dbh;
 }
+
 //SQL実行関数
 function queryPost($dbh, $sql, $data){
 	//クエリー作成
@@ -366,58 +367,7 @@ function getPostList($currentMinNum = 1, $span = 12){
 	}
 }
 
-function getProductList($currentMinNum = 1, $span = 20){
-  debug('商品情報を取得します。');
-  //例外処理
-  try {
-    // DBへ接続
-    $dbh = dbConnect();
-    // 件数用のSQL文作成
-    $sql = 'SELECT id FROM product';
-    $data = array();
-    // クエリ実行
-    $stmt = queryPost($dbh, $sql, $data);
-    $rst['total'] = $stmt->rowCount(); //総レコード数
-    $rst['total_page'] = ceil($rst['total']/$span); //総ページ数
-    if(!$stmt){
-      return false;
-    }
-    
-    // ページング用のSQL文作成
-    $sql = 'SELECT * FROM product';
-//    if(!empty($category)) $sql .= ' WHERE category = '.$category;
-//    if(!empty($sort)){
-//      switch($sort){
-//        case 1:
-//          $sql .= ' ORDER BY price ASC';
-//          break;
-//        case 2:
-//          $sql .= ' ORDER BY price DESC';
-//          break;
-//        case 3:
-//          $sql .= ' ORDER BY create_date DESC';
-//          break;
-//      }
-//    } 
-    $sql .= ' LIMIT '.$span.' OFFSET '.$currentMinNum;
-    $data = array();
-    debug('SQL：'.$sql);
-    // クエリ実行
-    $stmt = queryPost($dbh, $sql, $data);
-
-    if($stmt){
-      // クエリ結果のデータを全レコードを格納
-      $rst['data'] = $stmt->fetchAll();
-      return $rst;
-    }else{
-      return false;
-    }
-
-  } catch (Exception $e) {
-    error_log('エラー発生:' . $e->getMessage());
-  }
-}
-
+//投稿詳細画面用。該当する１件だけを取ってくる
 function getPostOne($p_id){
 	debug('投稿情報を取得します。');
 	debug('投稿ID：'.$p_id);
@@ -440,7 +390,7 @@ function getPostOne($p_id){
 }
 
 
-//自分の投稿全て取得
+//過去の投稿一覧用。自分の投稿全て取得
 function getMyPosts($u_id){
 	debug('自分の商品情報を取得します。');
 	debug('ユーザーID：'.$u_id);
@@ -460,6 +410,8 @@ function getMyPosts($u_id){
 		error_log('エラー発生:' . $e->getMessage());
 	}
 }
+
+
 //マイページ用　最新３件だけ取得
 function getMyPosts3($u_id){
 	debug('自分の商品情報を取得します。');
@@ -480,6 +432,30 @@ function getMyPosts3($u_id){
 		error_log('エラー発生:' . $e->getMessage());
 	}
 }
+
+//いいね機能用
+function isLike($u_id,$p_id){
+	debug('お気に入り情報があるか確認します');
+	debug('ユーザーID：'.$u_id);
+	debug('投稿ID：'.$p_id);
+	try{
+		$dbh = dbConnect();
+		$sql = 'SELECT * FROM `like` WHERE post_id = :p_id AND user_id = :u_id';
+		$data = array(':u_id' => $u_id, ':p_id'=> $p_id);
+		$stmt = queryPost($dbh, $sql, $data);
+		
+		if($stmt->rowCount()){
+			debug('お気に入りです');
+			return true;
+		} else {
+			debug('特に気に入っていません');
+			return false;
+		}
+	} catch (Exception $e) {
+		error_log('エラー発生：'.$e->getMessage());
+	}
+}
+
 //================================
 // その他
 //================================

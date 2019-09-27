@@ -62,8 +62,29 @@
 			fileReader.readAsDataURL(file);
 		});
 		
+		//いいね登録＆削除
+		var $like, likePostId;
+		$like = $('.js-click-like') || null;
+		likePostId = $like.data('postid') || null;
+		if(likePostId !== undefined && likePostId !== null){
+			$like.on('click', function(){
+				var $this = $(this);
+				$.ajax({
+					type: 'POST',
+					url: 'ajaxLike.php',
+					data: {postId : likePostId}
+				}).done(function(data){
+					console.log('Ajax Success');
+					$this.toggleClass('active');
+				}).fail(function( msg ) {
+					console.log('Ajax Error');
+				});
+			});
+		}
 		
-	})
+
+		
+	});
 
 </script>
 </body>
