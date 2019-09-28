@@ -3,13 +3,15 @@
 require('function.php');
 
 debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
-debug('「　マイページ　');
+debug('「　トップページ　');
 debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
 debugLogStart();
 
 require('auth.php');
 
 $currentPageNum = (!empty($_GET['p'])) ? $_GET['p'] : 1;
+$u_id = $_SESSION['user_id'];
+$p_id = (!empty($_GET['p_id'])) ? $_GET['p_id'] : '';
 //$category = (!empty($_GET['c_id'])) ? $_GET['c_id'] : '';
 //$sort =(!empty($_GET['sort'])) ? $_GET['sort'] : '';
 
@@ -62,7 +64,6 @@ require('head.php');
 								<p class="postUserName"></p>
 							</div>
 						</a>
-						<span><i class="fa fa-heart icn-like js-click-like <?php if(isLike($_SESSION['user_id'],$dbPostData['id'])) { echo 'active'; } ?>" aria-hidden="true" data-postid="<?php echo sanitize($dbPostData['id']); ?>"> </i></span>
 					</div>
 				</div>
 				<?php

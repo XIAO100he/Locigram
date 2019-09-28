@@ -362,6 +362,7 @@ function getPostList($currentMinNum = 1, $span = 12){
 		}else{
 			return false;
 		}
+		
 	} catch (Exception $e) {
 		error_log('エラー発生:' . $e->getMessage());
 	}
@@ -374,8 +375,7 @@ function getPostOne($p_id){
 
 	try {
 		$dbh = dbConnect();
-		$sql = 'SELECT p.id , p.title , p.area_id, p.genre_id, p.comment, p.pic1, p.pic2, p.pic3, p.user_id, p.create_date, p.update_date, a.name AS area, g.name AS genre
-             FROM post AS p LEFT JOIN area AS a ON (p.area_id = a.id) LEFT JOIN genre AS g ON (p.genre_id = g.id) WHERE p.id = :p_id AND p.delete_flg = 0';
+		$sql = 'SELECT p.id , p.title , p.area_id, p.genre_id, p.comment, p.pic1, p.pic2, p.pic3, p.user_id, p.create_date, p.update_date, a.name AS area, g.name AS genre, u.name AS users FROM post AS p LEFT JOIN area AS a ON (p.area_id = a.id) LEFT JOIN genre AS g ON (p.genre_id = g.id) LEFT JOIN users AS u ON (p.user_id = u.id) WHERE p.id = :p_id AND p.delete_flg = 0';
 		$data = array(':p_id' => $p_id);
 		$stmt = queryPost($dbh, $sql, $data);
 
@@ -455,6 +455,25 @@ function isLike($u_id,$p_id){
 		error_log('エラー発生：'.$e->getMessage());
 	}
 }
+
+//いいねを付けた投稿
+function likePost(){
+	debug('お気に入りの投稿を表示します');
+	try{
+		$dbh = dbConnect();
+		$sql = 'SELECT  l.post_id , l.user_id , p.name AS post, u.name AS users FROM `like` WHERE l.delete_flg = 0';
+		$data = array();
+		$stmt = queryPost($dbh, $sql, $data);
+		if($stmt){
+			return $stmt->fetchAll();
+		}else{
+			return false;
+		}
+	} catch (Exception $e) {
+		error_log('エラー発生:' . $e->getMessage());
+	}
+}
+
 
 //================================
 // その他

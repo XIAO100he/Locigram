@@ -39,6 +39,8 @@ require('header.php');
 	</div>
 	<div class="postMainTitle">
 		<span class="tate-sen"></span><?php echo sanitize($viewData['title']); ?>
+		<span class="post-like"><i class="fa fa-heart icn-like js-click-like <?php if(isLike($_SESSION['user_id'], $viewData ['id'])) { echo 'active'; } ?>" aria-hidden="true" 
+														data-postid="<?php echo sanitize($viewData ['id']); ?>"> </i></span>
 	</div>
 	<div class="postImage">
 		<div class="img-main">
@@ -49,6 +51,7 @@ require('header.php');
 			<img src="<?php echo showImg(sanitize($viewData['pic2'])); ?>" alt="画像2：<?php echo sanitize($viewData['title']); ?>" class="js-switch-img-sub">
 			<img src="<?php echo showImg(sanitize($viewData['pic3'])); ?>" alt="画像3：<?php echo sanitize($viewData['title']); ?>" class="js-switch-img-sub">
 		</div>
+		<p class="com-user"><span>from:</span><?php echo sanitize($viewData['users']); ?></p>
 	</div>
 	<div class="postComment">
 		<p class="com-title">コメント</p>
