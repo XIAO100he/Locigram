@@ -118,7 +118,7 @@ require('head.php');
 	require('header.php'); 
 	?>
 	<div class="main-wrapper">
-		<h2><?php echo (!$edit_flg) ? '投稿する' : '投稿内容を編集する'; ?></h2>
+		<h2><?php echo (!$edit_flg) ? '投稿する' : '編集する'; ?></h2>
 		<div class="registPost-wrapper">
 			<form action="" method="post" enctype="multipart/form-data">
 <!--			全体のエラーメッセージ-->
@@ -251,6 +251,13 @@ require('head.php');
 					<div class="photoPost">
 						<input type="submit" class='photoPost-btn' value="<?php echo (!$edit_flg) ? '投稿する' : '更新する'; ?>">
 					</div>
+<!--					ボタン終了-->
+<!--			削除ボタン-->
+					<?php	if(!empty($edit_flg)){ ?>
+					<div class="deletePost">
+						<p class="deletePost-btn"><a href="deletePost.php" class="deleteBtn">投稿を削除する</a></p>
+					</div>
+					<?php } ?>
 <!--					ボタン終了-->
 				</div>
 			</form>

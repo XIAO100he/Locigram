@@ -30,7 +30,6 @@
 		//画像ライブプレビュー
 		var $dropArea = $('.area-drop');
 		var $fileInput = $('.input-file');
-		
 
 		//stopPropagation()は、親要素への伝播をキャンセル
 		//preventDefault() は、その要素のイベントをキャンセル
@@ -61,6 +60,15 @@
 			// 6. 画像読み込み
 			fileReader.readAsDataURL(file);
 		});
+		
+		
+		// テキストエリアカウント
+		var $countUp = $('#js-count'),
+				$countView = $('#js-count-view');
+		$countUp.on('keyup', function(e){
+			$countView.html($(this).val().length);
+		});
+		
 		
 		//いいね登録＆削除
 		var $like, likePostId;

@@ -4,37 +4,24 @@
 require('function.php');
 
 debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
-debug('「　退会ページ　');
+debug('「　投稿削除ページ　');
 debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
 debugLogStart();
 
+$p_id = (!empty($_GET['p_id'])) ? $_GET['p_id']: '';
+$dbFormData = (!empty($p_id)) ? getPost($_SESSION['user_id'], $p_id) : '';
 
-
-//================================
-// 画面処理
-//================================
-// post送信されていた場合
 if(!empty($_POST)){
 	debug('POST送信があります。');
-	//例外処理
 	try {
-		// DBへ接続
 		$dbh = dbConnect();
-		// SQL文作成
-		$sql1 = 'UPDATE users SET  delete_flg = 1 WHERE id = :us_id';
-		// データ流し込み
-		$data = array(':us_id' => $_SESSION['user_id']);
-		// クエリ実行
-		$stmt1 = queryPost($dbh, $sql1, $data);
+		$sql = 'DELETE FROM post WHERE id = :p_id';
+		$data = array(':p_id' => $p_id);
+		$stmt = queryPost($dbh, $sql, $data);
 
-
-		// クエリ実行成功の場合（最悪userテーブルのみ削除成功していれば良しとする）
-		if($stmt1){
-			//セッション削除
-			session_destroy();
-			debug('セッション変数の中身：'.print_r($_SESSION,true));
-			debug('トップページへ遷移します。');
-			header("Location:index.php");
+		if($stmt){
+			debug('自分の投稿一覧へ遷移します。');
+			header("Location:postHis.php");
 		}else{
 			debug('クエリが失敗しました。');
 			$err_msg['common'] = MSG06;
@@ -46,21 +33,23 @@ if(!empty($_POST)){
 	}
 }
 debug('画面表示処理終了 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
+
 ?>
 
 
 <?php
-$siteTitle = '退会';
+$siteTitle = '投稿削除';
 require('head.php');
 ?>
 <?php 
 require('header.php');
 ?>
 <div class=withdraw-wrapper>
-	<h2>退会手続</h2>
+	<h2>投稿削除</h2>
 	<form action="" method="post">
-		<div class=withdraw-box>
-			<input type="submit" class='withdraw-btn' value='退会する' name="submit">
+		<p class="deleteMsg">本当に削除しますか？</p>
+		<div class=delete-box>
+			<input type="submit" class='delete-btn' value='削除する' name="submit">
 		</div>
 	</form>
 	<p class='back-to'>
@@ -71,5 +60,3 @@ require('header.php');
 <?php
 require('footer.php');
 ?>
-
-
