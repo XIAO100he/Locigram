@@ -29,6 +29,14 @@ require('head.php');
 	<?php
 	require('header.php');
 	?>
+	<!--	パンくずリスト-->
+	<div class="breadcrumd">
+		<span class="bread past"><a href="index.php" class=''>トップページ</a></span>
+		<span><i class="fas fa-chevron-left"></i></span>
+		<span class="bread past"><a href="mypage.php" class=''>マイページ</a></span>
+		<span><i class="fas fa-chevron-left"></i></span>
+		<span class="bread now"><a href="#" class=''>過去の投稿</a></span>
+	</div>
 	<div class="main-wrapper">
 		<h2>過去の投稿</h2>
 		<!--メインボックス-->

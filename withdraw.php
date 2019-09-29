@@ -56,7 +56,6 @@ require('head.php');
 <?php 
 require('header.php');
 ?>
-
 <div class=withdraw-wrapper>
 	<h2>退会手続</h2>
 	<form action="" methd="post">

@@ -223,7 +223,7 @@ i{
 .allPost-wrapper{
 	width:68%;
 	height:100%;
-	padding-top:10px;
+	padding-top:80px;
 	margin:0 auto;
 	position: relative;
 }
@@ -377,9 +377,13 @@ i{
 	padding-top:80px;
 	margin: 0 auto;
 }
+.withdraw-wrapper h2{
+	border-left:5px solid #D2B48C;
+	padding-left:7px;
+}
 .back-to{
 	margin-top:20px;
-	font-size:18px;
+	font-size:15px;
 }
 .back-to a{
 	color:#808080;
@@ -457,19 +461,22 @@ label.err input{
 	width:80%;
 	min-height:640px;
 	margin:0 auto;
-	padding-top:100px;
+	padding-top:70px;
 	overflow: hidden;
+}
+.main-wrapper h2{
+	border-left:5px solid #D2B48C;
+	padding-left:7px;
 }
 .my-main_wrapper{
 	width:70%;
 	min-height:640px;
 	float:left;
-	margin-top:80px;
+	margin-top:20px;
 	overflow: hidden;
 }
 .myPost-title{
-	border-left:5px solid #D2B48C;
-	padding-left:5px;
+	margin-top:30px;
 }
 .a_Post{
 	margin-top:40px;
@@ -754,10 +761,22 @@ form select:hover{
 }
 
 
-
-
-
-
-
+/*****************パンくずリスト****************/
+.breadcrumd {
+	width:80%;
+	height:30px;
+	margin:0 auto;
+	margin-top:30px;
+}
+.past a:hover{
+	cursor: pointer;
+	color:#c0c0c0;
+}
+.bread a{
+	color:black;
+}
+.now{
+	font-weight:bold;
+}
 
 

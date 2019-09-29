@@ -45,7 +45,6 @@ require('head.php');
 	?>
 	<div class="index-wrapper">
 		<div class="allPost-wrapper">
-			<div class="theme-wrapper">すべての投稿</div>
 <!--			投稿件数-->
 			<div class="postNum">
 				<span class="num"><?php echo (!empty($dbPostData['data'])) ? $currentMinNum+1 : 0; ?></span> - <span class="num"><?php echo $currentMinNum+count($dbPostData['data']); ?></span>件 / <span class="num"><?php echo sanitize($dbPostData['total']); ?></span>件中
