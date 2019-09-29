@@ -461,7 +461,7 @@ function likePost(){
 	debug('お気に入りの投稿を表示します');
 	try{
 		$dbh = dbConnect();
-		$sql = 'SELECT  l.post_id , l.user_id , p.name AS post, u.name AS users FROM `like` WHERE l.delete_flg = 0';
+		$sql = 'SELECT * FROM `like` AS l LEFT JOIN post AS p ON (l.post_id = p.id) LEFT JOIN users AS u ON (l.user_id = u.id) WHERE l.delete_flg = 0';
 		$data = array();
 		$stmt = queryPost($dbh, $sql, $data);
 		if($stmt){

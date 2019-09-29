@@ -32,6 +32,14 @@ require('head.php');
 	<?php
 	require('header.php');
 	?>
+<!--	パンくずリスト-->
+	<div class="breadcrumd">
+		<span class="bread past"><a href="index.php" class=''>トップページ</a></span>
+		<span><i class="fas fa-chevron-left"></i></span>
+		<span class="bread past"><a href="mypage.php" class=''>マイページ</a></span>
+		<span><i class="fas fa-chevron-left"></i></span>
+		<span class="bread now"><a href="#" class=''>お気に入り</a></span>
+	</div>
 	<div class="main-wrapper">
 		<h2>お気に入り</h2>
 		<!--メインボックス-->
