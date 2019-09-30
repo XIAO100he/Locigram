@@ -145,7 +145,7 @@ require('head.php');
 						<div class="theme-wrapper">
 							<p class="sub_theme area">地域<span class="must">必須</span></p>
 						</div>
-						<select name="area_id">
+						<select class="postSelect" name="area_id">
 							<option value="0" <?php if(getFormData('area_id') ==0){ echo 'selected'; } ?>> 選択してください</option>
 							<?php
 							foreach($dbAreaData as $key => $val){
@@ -168,7 +168,7 @@ require('head.php');
 						<div class="theme-wrapper">
 							<p class="sub_theme genre">ジャンル<span class="must">必須</span></p>
 						</div>
-						<select name="genre_id">
+						<select class="postSelect" name="genre_id">
 							<option value="0" <?php if(getFormData('genre_id') ==0){ echo 'selected'; } ?>> 選択してください</option>
 							<?php
 							foreach($dbGenreData as $key => $val){
