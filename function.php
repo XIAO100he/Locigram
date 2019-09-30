@@ -251,7 +251,6 @@ function queryPost($dbh, $sql, $data){
 	debug('クエリ成功。');
 	return $stmt;
 }
-
 //ユーザー情報を取る
 function getUser($u_id){
 	debug('ユーザー情報を取得します');
@@ -461,7 +460,7 @@ function getMyLike($u_id){
 	debug('お気に入りの投稿を表示します');
 	try{
 		$dbh = dbConnect();
-		$sql = 'SELECT * FROM `like` AS l LEFT JOIN post AS p ON (l.post_id = p.id) LEFT JOIN users AS u ON (l.user_id = u.id) WHERE l.user_id = :u_id AND l.delete_flg = 0';
+		$sql = 'SELECT * FROM `like` AS l INNER JOIN post AS p ON (l.post_id = p.id) INNER JOIN users AS u ON (l.user_id = u.id) WHERE l.user_id = :u_id AND l.delete_flg = 0';
 		$data = array(':u_id' => $u_id);
 		$stmt = queryPost($dbh, $sql, $data);
 		if($stmt){

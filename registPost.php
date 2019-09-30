@@ -80,7 +80,7 @@ if(!empty($_POST)){
 			$dbh = dbConnect();
 			if($edit_flg){
 				debug('DB更新です');
-				$sql = 'UPDATE post SET title= :title, genre_id = :genre, area_id = :area, comment = :comment, pic1 =:pic1, pic2 = :pic2, pic3 = pic3 WHERE user_id = :u_id AND id = :p_id';
+				$sql = 'UPDATE post SET title= :title, genre_id = :genre, area_id = :area, comment = :comment, pic1 =:pic1, pic2 = :pic2, pic3 = pic3, user_id = :u_id, id = :p_id WHERE user_id = :u_id AND id = :p_id';
 				$data = array(':title' => $title, ':genre'=> $genre, ':area'=> $area, ':comment' => $comment, ':pic1'=>$pic1, ':pic2'=> $pic2, ':pic3'=> $pic3, ':u_id'=> $_SESSION['user_id'], ':p_id' => $p_id);
 			} else {
 				debug('DB新規登録です');
@@ -255,7 +255,7 @@ require('head.php');
 <!--			削除ボタン-->
 					<?php	if(!empty($edit_flg)){ ?>
 					<div class="deletePost">
-						<p class="deletePost-btn"><a href="deletePost.php" class="deleteBtn">投稿を削除する</a></p>
+						<p class="deletePost-btn"><a href="deletePost.php<?php echo (!empty(appendGetParam())) ? appendGetParam() : '?p_id='.$val['id']; ?>" class="deleteBtn">投稿を削除する</a></p>
 					</div>
 					<?php } ?>
 <!--					ボタン終了-->

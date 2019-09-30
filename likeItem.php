@@ -52,7 +52,7 @@ require('head.php');
 				foreach($likePost as $key => $val ):
 				?>
 				<div class="a_Post">
-					<a href="registPost.php<?php echo (!empty(appendGetParam())) ? appendGetParam().'&p_id='.$val['id'] : '?p_id='.$val['id']; ?>" class="panel">
+					<a href="postDetail.php<?php echo (!empty(appendGetParam())) ? appendGetParam().'&p_id='.$val['post_id'] : '?p_id='.$val['post_id']; ?>" class="panel">
 						<div class="panel-head">
 							<img src="<?php echo showImg(sanitize($val['pic1'])); ?>" alt="<?php echo sanitize($val['name']); ?>">
 						</div>
