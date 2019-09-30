@@ -339,7 +339,7 @@ function getPostList($currentMinNum = 1, $span = 12){
 	debug('投稿内容を取得します');
 	try{
 		$dbh = dbConnect();
-		$sql = 'SELECT id FROM post order by create_date';
+		$sql = 'SELECT id FROM post order by create_date DESC';
 		$data = array();
 		$stmt = queryPost($dbh, $sql, $data);
 		$rst['total'] = $stmt->rowCount(); //総レコード数
@@ -457,12 +457,12 @@ function isLike($u_id,$p_id){
 }
 
 //いいねを付けた投稿
-function likePost(){
+function getMyLike($u_id){
 	debug('お気に入りの投稿を表示します');
 	try{
 		$dbh = dbConnect();
-		$sql = 'SELECT * FROM `like` AS l LEFT JOIN post AS p ON (l.post_id = p.id) LEFT JOIN users AS u ON (l.user_id = u.id) WHERE l.delete_flg = 0';
-		$data = array();
+		$sql = 'SELECT * FROM `like` AS l LEFT JOIN post AS p ON (l.post_id = p.id) LEFT JOIN users AS u ON (l.user_id = u.id) WHERE user_id = :u_id AND l.delete_flg = 0';
+		$data = array(':u_id' => $u_id);
 		$stmt = queryPost($dbh, $sql, $data);
 		if($stmt){
 			return $stmt->fetchAll();

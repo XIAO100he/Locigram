@@ -111,7 +111,7 @@ if(!empty($_POST)){
 						<p>ニックネーム</p>
 						<p class="must"><span>必須</span></p>
 					</div>
-					<input type="text" name="name" placeholder="（例）ふるさと太郎" value="<?php if(!empty($_POST['name'])) echo $_POST['name']; ?>">
+					<input type="text" name="name" placeholder="（例）ろち太郎" value="<?php if(!empty($_POST['name'])) echo $_POST['name']; ?>">
 				</label>
 				<div class="area-msg">
 					<?php
@@ -124,7 +124,7 @@ if(!empty($_POST)){
 						<p>メールアドレス</p>
 						<p class="must"><span>必須</span></p>
 					</div>
-					<input type="text" name="email" placeholder="（例）furusato@mail.com" value="<?php if(!empty($_POST['email'])) echo $_POST['email']; ?>">
+					<input type="text" name="email" placeholder="（例）loci@mail.com" value="<?php if(!empty($_POST['email'])) echo $_POST['email']; ?>">
 				</label>
 				<div class="area-msg">
 					<?php
@@ -137,7 +137,7 @@ if(!empty($_POST)){
 						<p>パスワード</p><p style="font-size:12px">※英数字６文字以上</p>
 						<p class="must"><span>必須</span></p>
 					</div>
-					<input type="password" name="password" placeholder="（例）furusato01" value="<?php if(!empty($_POST['pass'])) echo $_POST['pass']; ?>">
+					<input type="password" name="password" placeholder="（例）locigram01" value="<?php if(!empty($_POST['pass'])) echo $_POST['pass']; ?>">
 				</label>
 				<div class="area-msg">
 					<?php
@@ -150,7 +150,7 @@ if(!empty($_POST)){
 						<p>パスワード（確認）</p>
 						<p class="must"><span>必須</span></p>
 					</div>
-					<input type="password" name="password_re" placeholder="（例）furusato01" value="<?php if(!empty($_POST['pass_re'])) echo $_POST['pass_re']; ?>">
+					<input type="password" name="password_re" placeholder="（例）locigram01" value="<?php if(!empty($_POST['pass_re'])) echo $_POST['pass_re']; ?>">
 				</label>
 				<div class="area-msg">
 					<?php

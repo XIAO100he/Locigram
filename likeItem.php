@@ -13,7 +13,9 @@ debugLogStart();
 //ログイン認証
 require('auth.php');
 
-$likePost = likePost();
+$u_id = $_SESSION['user_id'];
+
+$likePost = getMylike($u_id);
 
 debug('取得した投稿データ：'.print_r($likePost,true));
 
